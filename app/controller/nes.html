@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<link rel="stylesheet" type="text/css" href="styles/controller.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="scripts/socket.io-1.3.7.js"></script>
+		<script src="scripts/controller.js"></script>
+	</head>
+	<body>
+		<div id="landscape">
+			<div class="hidebar"></div>
+			<div id="controller">
+				<div class="corners">
+					<div class="dark top left"></div>
+					<div class="light top right"></div>
+					<div class="dark bottom left flip-v"></div>
+					<div class="dark bottom right flip-a"></div>
+				</div>
+				<div class="borders">
+					<div class="top">
+						<div></div>
+					</div>
+					<div class="bottom">
+						<div></div>
+					</div>
+					<div class="left">
+						<div></div>
+					</div>
+					<div class="right">
+						<div></div>
+					</div>
+					<div class="inner">
+						<div></div>
+					</div>
+				</div>
+				<div class="main">
+					<div>
+						<div class="cross">
+							<div>
+								<div class="up"></div>
+								<div class="down"></div>
+								<div class="left"></div>
+								<div class="right"></div>
+							</div>
+						</div>
+						<div class="middle">
+							<div>
+								<div class="top"></div>
+								<div class="middle"></div>
+								<div class="bottom"></div>
+							</div>
+						</div>
+						<div class="buttons">
+							<div class="logo">
+								<div></div>
+							</div>
+							<div class="btns">
+								<div class="a">
+									<div></div>
+								</div>
+								<div class="b">
+									<div></div>
+								</div>
+							</div>
+							<div class="letters">
+								<div class="a">
+									<div></div>
+								</div>
+								<div class="b">
+									<div></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="out"></div>
+				<div class="waiting">
+					<div>loading..</div>
+				</div>
+			</div>
+		</div>
+		<div id="portrait">
+			<img src="/15/socket/assets/rotate-back.jpg"/>
+			<div></div>
+		</div>
+	</body>
+</html>

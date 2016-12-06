@@ -1,0 +1,33 @@
+{
+  "name": "gangsta-claus",
+  "version": "1.0.0",
+  "description": "HTML5 Game",
+  "main": "index.js",
+  "scripts": {
+    "watch" : "webpack -w",
+    "dev" : "webpack -d",
+    "production" : "webpack -p"
+  },
+  "keywords": [
+    "HTML5",
+    "Javascript",
+    "game",
+    "christmas"
+  ],
+  "author": "Nick de Rozarieux",
+  "license": "MIT",
+  "dependencies": {
+    "howler": "^2.0.2",
+    "jquery": "^3.1.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  }
+}

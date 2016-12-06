@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="testsprite" tilewidth="32" tileheight="32">
+  <image source="../tiled/testsprite.png" width="640" height="640"/>
+ </tileset>
+ <tileset firstgid="401" name="testspriteevil" tilewidth="32" tileheight="32">
+  <image source="../tiled/testspriteevil.png" width="640" height="640"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="4" height="4">
+  <data>
+   <tile gid="41"/>
+   <tile gid="42"/>
+   <tile gid="45"/>
+   <tile gid="46"/>
+   <tile gid="69"/>
+   <tile gid="51"/>
+   <tile gid="51"/>
+   <tile gid="68"/>
+   <tile gid="69"/>
+   <tile gid="51"/>
+   <tile gid="51"/>
+   <tile gid="68"/>
+   <tile gid="73"/>
+   <tile gid="75"/>
+   <tile gid="76"/>
+   <tile gid="78"/>
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="4" height="4">
+  <data>
+   <tile gid="53"/>
+   <tile gid="54"/>
+   <tile gid="53"/>
+   <tile gid="54"/>
+   <tile gid="0"/>
+   <tile gid="90"/>
+   <tile gid="91"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="110"/>
+   <tile gid="111"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="4" height="4">
+  <data>
+   <tile gid="334"/>
+   <tile gid="335"/>
+   <tile gid="374"/>
+   <tile gid="375"/>
+   <tile gid="0"/>
+   <tile gid="294"/>
+   <tile gid="295"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="314"/>
+   <tile gid="315"/>
+   <tile gid="0"/>
+   <tile gid="271"/>
+   <tile gid="272"/>
+   <tile gid="273"/>
+   <tile gid="274"/>
+  </data>
+ </layer>
+</map>

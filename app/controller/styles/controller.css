@@ -1,0 +1,490 @@
+@font-face {
+	font-family:"Nes Controller";
+	src:url("NES_Controller_MrShrike.eot#") format("eot"),
+		url("NES_Controller_MrShrike.woff") format("woff"),
+		url("NES_Controller_MrShrike.ttf") format("truetype"),
+		url("NES_Controller_MrShrike.svg#NesController") format("svg");
+		font-weight:normal;
+		font-style:normal;
+}
+
+* {
+	font-family:"Nes Controller";
+	margin: 0;
+	padding: 0;
+	border: none;
+	position: relative;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	background-color: black;
+}
+
+
+
+
+
+
+
+
+
+
+.flip-h {
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
+}
+.flip-v {
+	-moz-transform: scaleY(-1);
+	-o-transform: scaleY(-1);
+	-webkit-transform: scaleY(-1);
+	transform: scaleY(-1);
+	filter: FlipV;
+	-ms-filter: "FlipV";
+}
+.flip-a {
+	-moz-transform: scaleY(-1) scaleX(-1);
+	-o-transform: scaleY(-1) scaleX(-1);
+	-webkit-transform: scaleY(-1) scaleX(-1);
+	transform: scaleY(-1) scaleX(-1);
+	filter: FlipV FlipH;
+	-ms-filter: "FlipV FlipH";
+}
+.top {
+	top: 0;
+}
+.bottom {
+	bottom: 0;
+}
+.left {
+	left: 0;
+}
+.right {
+	right: 0;
+}
+
+
+
+
+
+.hidebar {
+    float: left;
+    width: 100%;
+    height: 1px;
+}
+
+
+
+
+
+
+#portrait,
+#landscape {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: none;
+}
+
+
+#portrait img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#portrait div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-image: url(../assets/rotate-text.jpg);
+	background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+#landscape .waiting {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+}
+#landscape .waiting div {
+	position: absolute;
+	left: 0;
+	height: auto;
+	width: 100%;
+	text-align: center;
+	color: white;
+	top: 50%;
+    margin-top: -13px;
+	font-size: 32px;
+}
+
+
+
+
+
+#cable,
+#controller {
+	float: left;
+	height: 100%;
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+.borders, 
+.corners {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.corners {
+	background-color: #333333;
+}
+.corners>div {
+	position: absolute;
+	height: 18px;
+	width: 18px;
+}
+
+.corners .dark {
+	background-image: url(../assets/nes-corner-d.jpg);
+}
+.corners .light {
+	background-image: url(../assets/nes-corner-l.jpg);
+}
+
+.borders>div {
+	position: absolute;
+}
+.borders .top,
+.borders .bottom  {
+	height: 6px;
+	left: 0;
+	width: 100%;
+	border-left: 18px solid transparent;
+	border-right: 18px solid transparent;
+}
+.borders .top div,
+.borders .bottom div {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+.borders .top div {
+	background-color: #e8e8e8;
+}
+.borders .bottom div {
+	background-color: #d7d7d7;
+}
+.borders .left,
+.borders .right  {
+	width: 6px;
+	height: 100%;
+	border-top: 18px solid transparent;
+	border-bottom: 18px solid transparent;
+}
+.borders .left div,
+.borders .right div {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+.borders .left div {
+	background-color: #d7d7d7;
+}
+.borders .right div {
+	background-color: #e8e8e8;
+}
+.borders .inner {
+	float: left;
+	width: 100%;
+	height: 100%;
+	border: 6px solid transparent;
+}
+.borders .inner div{
+	float: left;
+	width: 100%;
+	height: 100%;
+	border: 18px solid #e0e0e0;
+}
+
+
+
+
+
+
+
+
+
+
+.main {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	border: 24px solid transparent;
+}
+.main>div {
+	float: left;
+	height: 100%;
+	width: 100%;
+}
+.main>div>div {
+	float: left;
+	height: 100%;
+	border: 20px solid transparent;
+}
+.main>div>div>div {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+.main .cross {
+	width: 33%;
+    border-right-width: 10px;
+}
+.main .cross>div {
+	background-image: url(../assets/nes-cross.png);
+	background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.main .cross>div>div {
+    position: absolute;
+    height: 19%;
+    width: 38%;
+}
+.main .cross>div>.up {
+    top: 20%;
+    left: 31%;
+}
+.main .cross>div>.down {
+	bottom: 20%;
+    left: 31%;
+}
+.main .cross>div>.left,
+.main .cross>div>.right {
+	top: 38%;
+    height: 24%;
+    width: 31%;
+}
+.main .cross>div>.left {
+    left: 0%;
+}
+.main .cross>div>.right {
+    right: 0%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main .middle {
+	width: 27%;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 10px;
+    border-right-width: 10px;
+}
+.main .middle>div>div{
+	float: left;
+	width: 100%;
+	height: 42.5%;
+	background-size: contain;
+    background-repeat: no-repeat;
+}
+.main .middle>div .top {
+	background-position: top center;
+	background-image: url(../assets/start-top.png);
+}
+
+.main .middle>div .middle {
+	background-position: center;
+	background-image: url(../assets/start-middle.png);
+}
+
+.main .middle>div .bottom {
+	height: 15%;
+	background-position: bottom center;
+	background-image: url(../assets/start-bottom.png);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main .buttons {
+	width: 40%;
+	border-width: 0;
+}
+
+.main .buttons>div {
+	float: left;
+	width: 100%;
+	height: 27%;
+	border: 20px solid transparent;
+	border-left-width: 10px;
+}
+
+.main .buttons>.logo {
+	border-bottom-width: 10px;
+}
+.main .buttons>.logo>div {
+	float: left;
+	width: 100%;
+	height: 100%;
+	background-image: url(../assets/nes-logo.png);
+	background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main .buttons>.btns {
+	height: 53%;
+	border-top-width: 10px;
+	border-bottom-width: 0px;
+}
+.main .buttons>.btns>div {
+	float: left;
+	width: 50%;
+    height: 100%;
+}
+.main .buttons>.btns>div>div {
+	float: left;
+	width: 100%;
+	height: 100%;
+	background-image: url(../assets/nes-button.png);
+	background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.main .buttons>.btns>.a>div {
+	border-right: 10px solid transparent;
+}
+.main .buttons>.btns>.b>div {
+	border-left: 10px solid transparent;
+}
+
+
+
+
+
+
+
+
+
+
+.main .buttons>.letters {
+	border-top-width: 0;
+	height: 20%;
+}
+.main .buttons>.letters>div {
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+.main .buttons>.letters>div>div {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+.main .buttons>.letters .a>div{
+	background-image: url(../assets/nes-a.png);
+	background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.main .buttons>.letters .b>div{
+	background-image: url(../assets/nes-b.png);
+	background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+
+
+
+
+
+
+.out {
+	position: absolute;
+	top: 0;
+    left: 60px;
+    height: 24px;
+    width: 77px;
+	background-image: url(../assets/nes-out.png);
+	background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+

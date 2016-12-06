@@ -1,0 +1,76 @@
+article.overlays .overlayassets{ 
+	background-repeat: no-repeat;
+	/*background-image: url(../game/assets/menu/mobileoverlayassets.png);
+	*/
+}
+
+
+article.overlays{
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	margin:0 auto;
+	width:480px;
+	height:240px;
+	.scale(1);
+	.transform-origin(top left);
+
+	&.active{
+		display: block;
+	}
+
+	section.mobile{
+		position: absolute;
+		bottom: 0;
+		height: 50px;
+		width: 100%;
+
+		>div{
+			position: absolute;
+			bottom: 5px;
+			width: 47px;
+			height: 42px;
+		}
+
+		.jump{
+			bottom:0; 
+			left: 20px;
+			width: 67px; 
+			height: 52px; 
+			background-size:cover; 
+			background-image:url(@jump);
+		}
+
+		.a{
+			background-image:url(@gun); 
+			right: 20px;
+		}
+
+		.b{
+			background-image:url(@bazooka); 
+			right: 80px;
+
+			span{
+				position: absolute;
+				top: -10px;
+				right: -5px;
+				font-size: 20px;
+				color: #ffffff;
+			}
+		}
+
+		.start{
+			width: 101px;
+			height: 24px;
+			left: 0;
+			right: 0;
+			margin-left: auto;
+			margin-right: auto;
+			background-image:url(@startMenu);
+			background-position: center 50%;
+		}
+	}
+}
+

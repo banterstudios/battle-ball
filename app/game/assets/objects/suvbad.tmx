@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="3" height="2" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="testsprite" tilewidth="32" tileheight="32">
+  <image source="../tiled/testsprite.png" width="640" height="640"/>
+ </tileset>
+ <tileset firstgid="401" name="testspriteevil" tilewidth="32" tileheight="32">
+  <image source="../tiled/testspriteevil.png" width="640" height="640"/>
+ </tileset>
+ <layer name="Tile Layer 2" width="3" height="2">
+  <data>
+   <tile gid="762"/>
+   <tile gid="763"/>
+   <tile gid="764"/>
+   <tile gid="782"/>
+   <tile gid="783"/>
+   <tile gid="784"/>
+  </data>
+ </layer>
+</map>
