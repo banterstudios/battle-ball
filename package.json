@@ -1,33 +1,57 @@
 {
   "name": "gangsta-claus",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "HTML5 Game",
   "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
-    "watch" : "webpack -w",
-    "dev" : "webpack -d",
-    "production" : "webpack -p"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banterstudios/gangsta-claus.git"
   },
   "keywords": [
     "HTML5",
-    "Javascript",
     "game",
+    "js",
+    "javascript",
+    "fun",
+    "santa",
+    "claus",
     "christmas"
   ],
   "author": "Nick de Rozarieux",
   "license": "MIT",
-  "dependencies": {
-    "howler": "^2.0.2",
-    "jquery": "^3.1.1"
+  "bugs": {
+    "url": "https://github.com/banterstudios/gangsta-claus/issues"
   },
+  "homepage": "https://github.com/banterstudios/gangsta-claus#readme",
   "devDependencies": {
-    "css-loader": "^0.26.1",
-    "file-loader": "^0.9.0",
-    "html-webpack-plugin": "^2.24.1",
-    "less": "^2.7.1",
-    "less-loader": "^2.2.3",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2"
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "^22.4.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "webpack": "^4.5.0",
+    "webpack-dev-middleware": "^3.1.2",
+    "webpack-hot-middleware": "^2.21.2"
   }
 }
