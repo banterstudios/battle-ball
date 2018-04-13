@@ -2,11 +2,12 @@ const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const WriteFilePlugin = require('write-file-webpack-plugin')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.join(__dirname, '/shared/index.handlebars'),
   filename: 'index.handlebars',
+  alwaysWriteToDisk: true,
   inject: 'body'
 })
 
@@ -35,14 +36,14 @@ module.exports = {
     rules: [
       // Pre-loaders
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'eslint',
         exclude: /node_modules/,
         enforce: 'pre'
       },
       // Loaders
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel']
       },

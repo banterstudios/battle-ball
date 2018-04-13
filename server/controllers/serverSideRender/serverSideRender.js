@@ -6,6 +6,8 @@ import App from '../../../shared/components/App'
 import serializeJS from 'serialize-javascript'
 
 export default async (req, res) => {
+  const context = {}
+
   const { html, css, ids = [] } = renderStatic(() => ReactDOMServer.renderToString(
     <StaticRouter location={req.url} context={context}>
       <App />
