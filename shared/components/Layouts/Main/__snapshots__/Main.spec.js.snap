@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Layouts/Main @renders should render correctly 1`] = `
+<glamorous(section)>
+  <Header />
+  <glamorous(div) />
+</glamorous(section)>
+`;
