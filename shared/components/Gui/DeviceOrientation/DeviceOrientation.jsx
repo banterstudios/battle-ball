@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react'
 import LazyImage from '../../Common/LazyImage'
 import glamorous from 'glamorous'
+import { createPortal } from 'react-dom'
+import { queryById } from '../../../utils/domUtils'
+
+const rootElem = process.browser ? queryById('modal-root') : null
 
 const StyledArticle = glamorous.article(({
   theme: {
@@ -9,8 +13,10 @@ const StyledArticle = glamorous.article(({
   }
 }) => ({
   zIndex: priorityModalZIndex,
-  display: 'none',
-  position: 'absolute',
+  position: 'fixed',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   top: 0,
   left: 0,
   width: '100%',
@@ -22,23 +28,21 @@ const StyledArticle = glamorous.article(({
 }))
 
 const StyledImgWrapper = glamorous.div(() => ({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  width: '75%',
-  margin: 'auto'
+  position: 'relative',
+  width: '75%'
 }))
 
 export default class DeviceOrientation extends PureComponent {
   render () {
-    return (
-      <StyledArticle>
-        <StyledImgWrapper>
-          <LazyImage src='/static/assets/images/rotate-text.jpg' />
-        </StyledImgWrapper>
-      </StyledArticle>
-    )
+    return rootElem ? (
+      createPortal(
+        <StyledArticle>
+          <StyledImgWrapper>
+            <LazyImage src='/static/assets/images/rotate-text.jpg' />
+          </StyledImgWrapper>
+        </StyledArticle>,
+        rootElem
+      )
+    ) : null
   }
 }
