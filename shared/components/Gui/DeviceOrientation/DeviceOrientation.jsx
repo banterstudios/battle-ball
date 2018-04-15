@@ -33,8 +33,16 @@ const StyledImgWrapper = glamorous.div(() => ({
 }))
 
 export default class DeviceOrientation extends PureComponent {
+  state = { hasMounted: false }
+
+  componentDidMount () {
+    this.setState({ hasMounted: true })
+  }
+
   render () {
-    return rootElem ? (
+    const { hasMounted } = this.state
+
+    return rootElem && hasMounted ? (
       createPortal(
         <StyledArticle>
           <StyledImgWrapper>

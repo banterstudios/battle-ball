@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import glamorous from 'glamorous'
 
 export default class Home extends Component {
   render () {
