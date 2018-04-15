@@ -28,7 +28,8 @@ module.exports = {
     'babel-polyfill',
     'react-hot-loader/patch',
     'webpack-hot-middleware/client',
-    './shared/index.js'
+    './shared/index.js',
+    './shared/styles/index.scss'
   ],
   output: {
     path: path.join(__dirname, '/build'),
@@ -59,7 +60,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader?-autoprefixer&sourceMap&minimize',
           'postcss-loader',
-          'sass-loader?sourceMap'
+          'sass-loader'
         ]
       },
       {
