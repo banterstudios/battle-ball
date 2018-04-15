@@ -3,6 +3,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.join(__dirname, '/shared/index.handlebars'),
@@ -14,6 +15,11 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 const HTMLWebpackHardDiskPlugin = new HtmlWebpackHarddiskPlugin({
   outputPath: path.join(__dirname, '/build/views')
 })
+
+const CopyWebpackPluginConfig = new CopyWebpackPlugin([{
+  from: 'shared/assets/',
+  to: 'assets/'
+}])
 
 module.exports = {
   name: 'client',
@@ -73,6 +79,7 @@ module.exports = {
   plugins: [
     HTMLWebpackPluginConfig,
     HTMLWebpackHardDiskPlugin,
+    CopyWebpackPluginConfig,
     new MiniCssExtractPlugin({
       filename: 'css/[name].css'
     }),

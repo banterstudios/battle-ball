@@ -5,7 +5,7 @@ import { StaticRouter } from 'react-router'
 import App from '../../../shared/components/App'
 import serializeJS from 'serialize-javascript'
 
-export default async (req, res) => {
+export default (req, res) => {
   const context = {}
 
   const { html, css, ids = [] } = renderStatic(() => ReactDOMServer.renderToString(
@@ -18,7 +18,8 @@ export default async (req, res) => {
     title: 'Gangsta Claus',
     initialHtml: html,
     initialCSS: css,
-    initialIds: serializeJS(ids)
+    initialIds: serializeJS(ids),
+    initialJSONState: serializeJS({})
   }
 
   // Render the index.handlebars with the template data.

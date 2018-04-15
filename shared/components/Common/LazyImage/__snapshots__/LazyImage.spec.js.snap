@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Gui/LazyImage @renders a div with a background image 1`] = `
+<LazyImage
+  alt=""
+  bgPos=""
+  bgRepeat=""
+  bgSize=""
+  src=""
+  useBgImage={true}
+>
+  <InView
+    onChange={[Function]}
+    resizeCheck={true}
+    scrollCheck={true}
+    timerCheck={false}
+    timerDelay={200}
+  >
+    <div>
+      <glamorous(div)
+        loaded={false}
+      >
+        <div
+          className="css-1kyj4b8"
+        >
+          <glamorous(div)
+            bgImage=""
+            bgPos=""
+            bgRepeat=""
+            bgSize=""
+          >
+            <div
+              className="css-r8yd8y"
+            />
+          </glamorous(div)>
+        </div>
+      </glamorous(div)>
+    </div>
+  </InView>
+</LazyImage>
+`;
+
+exports[`components/Gui/LazyImage @renders in default state 1`] = `
+<LazyImage
+  alt=""
+  bgPos=""
+  bgRepeat=""
+  bgSize=""
+  src=""
+  useBgImage={false}
+>
+  <InView
+    onChange={[Function]}
+    resizeCheck={true}
+    scrollCheck={true}
+    timerCheck={false}
+    timerDelay={200}
+  >
+    <div>
+      <glamorous(div)
+        loaded={false}
+      >
+        <div
+          className="css-1kyj4b8"
+        >
+          <glamorous(img)
+            alt=""
+            src=""
+          >
+            <img
+              alt=""
+              className="css-1az0zxs"
+              src=""
+            />
+          </glamorous(img)>
+        </div>
+      </glamorous(div)>
+    </div>
+  </InView>
+</LazyImage>
+`;

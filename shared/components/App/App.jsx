@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 
 import { ThemeProvider } from 'glamorous'
+import themeVariables from '../../consts/theme'
 
 import MainLayout from '../Layouts/Main'
 
@@ -14,7 +15,7 @@ import PageNotFound from '../../views/PageNotFound'
 
 export default (props) => {
   return (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider theme={themeVariables}>
       <MainLayout>
         <Switch>
           <Route exact path='/' component={Home} />

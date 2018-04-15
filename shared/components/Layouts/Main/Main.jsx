@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import glamorous from 'glamorous'
+import DeviceOrientation from '../../Gui/DeviceOrientation'
 
 const Content = glamorous.div(() => ({
   position: 'relative',
@@ -21,6 +22,7 @@ export default class Main extends Component {
     return (
       <Content>
         { children }
+        <DeviceOrientation />
       </Content>
     )
   }
