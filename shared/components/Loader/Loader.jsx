@@ -9,7 +9,6 @@ const StyledImageContainer = glamorous.div(({ loaderImgType }) => ({
   position: 'absolute',
   top: loaderImgType === 'skull' ? '20px' : '116px',
   left: '50%',
-  width: 'auto',
   transform: 'translateX(-50%)'
 }))
 

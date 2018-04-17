@@ -37,10 +37,12 @@ export default (WrappedComponent) => (
     }
 
     componentDidMount () {
+      this.hasMounted = true
       this.start()
     }
 
     componentWillUnmount () {
+      this.hasMounted = false
       this.cleanup()
     }
 
@@ -91,6 +93,10 @@ export default (WrappedComponent) => (
     }
 
     performCheck = () => {
+      if (!this.hasMounted) {
+        return false
+      }
+
       const isVisible = isElemInView(this.containerRef, this.props.offset)
 
       if (isVisible !== this.state.isVisible) {
