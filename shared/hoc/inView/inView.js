@@ -4,14 +4,15 @@ import { isElemInView, testForPassiveScroll } from '../../utils/domUtils'
 import { throttle } from '../../utils/commonUtils'
 import { omit } from '../../utils/objectUtils'
 
-export default ({ once = false }) => (WrappedComponent) => (
+export default (WrappedComponent) => (
   class InView extends PureComponent {
     static propTypes = {
       scrollCheck: PropTypes.bool,
       resizeCheck: PropTypes.bool,
       timerCheck: PropTypes.bool,
       timerDelay: PropTypes.number,
-      offset: PropTypes.number
+      offset: PropTypes.number,
+      once: PropTypes.bool
     }
 
     static defaultProps = {
@@ -19,7 +20,8 @@ export default ({ once = false }) => (WrappedComponent) => (
       resizeCheck: true,
       timerCheck: false,
       timerDelay: 200,
-      offset: 0
+      offset: 0,
+      once: false
     }
 
     constructor (props) {
@@ -94,7 +96,7 @@ export default ({ once = false }) => (WrappedComponent) => (
       if (isVisible !== this.state.isVisible) {
         this.setState({ isVisible })
 
-        if (once && isVisible) {
+        if (this.props.once && isVisible) {
           this.cleanup()
         }
       }

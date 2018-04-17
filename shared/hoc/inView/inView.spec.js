@@ -15,7 +15,7 @@ describe('components/Common/InView', () => {
   let StubComponent
 
   beforeEach(() => {
-    StubComponent = inView({ once: false })(MockComponent)
+    StubComponent = inView(MockComponent)
   })
 
   describe('Given this component', () => {
@@ -91,8 +91,8 @@ describe('components/Common/InView', () => {
         describe('And isVisible is true', () => {
           it('perform a clean up', () => {
             isElemInView.mockImplementation(() => false)
-            StubComponent = inView({ once: true })(MockComponent)
-            const component = mount(<StubComponent />)
+            StubComponent = inView(MockComponent)
+            const component = mount(<StubComponent once />)
             isElemInView.mockImplementation(() => true)
             const spy = jest.spyOn(component.instance(), 'cleanup')
             component.instance().forceUpdate()

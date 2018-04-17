@@ -1,3 +1,4 @@
 export {
-  throttle
+  throttle,
+  calculateScaleForGame
 } from './commonUtils'

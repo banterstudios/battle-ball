@@ -25,7 +25,7 @@ const BgImage = glamorous.div(({ bgSize, bgPos, bgRepeat, bgImage }) => ({
   backgroundImage: `url('${bgImage}')`
 }))
 
-@inView({ once: true })
+@inView
 export default class LazyImage extends PureComponent {
   static propTypes = {
     src: PropTypes.string,

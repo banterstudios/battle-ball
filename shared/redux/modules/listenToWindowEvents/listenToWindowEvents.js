@@ -13,7 +13,7 @@ export const globalWindowResize = ({ target: { innerWidth, innerHeight } }) => (
 })
 
 // Thunks
-export const listenToWindowEvent = (name, mapEventToAction, filter = (e) => true) => (dispatch) => {
+export const listenToWindowEvent = ({ name, mapEventToAction, filter = (e) => true }) => (dispatch) => {
   const handleEvent = (e) => {
     if (filter(e)) {
       dispatch(mapEventToAction(e))
@@ -21,13 +21,14 @@ export const listenToWindowEvent = (name, mapEventToAction, filter = (e) => true
   }
 
   window.addEventListener(name, handleEvent)
+  window.dispatchEvent(new Event(name))
 
   return () => window.removeEventListener(name, handleEvent)
 }
 
 // Reducers
 const initialState = {
-  dimensions: {}
+  resize: {}
 }
 
 export default (state = initialState, { type, data }) => {
@@ -36,7 +37,7 @@ export default (state = initialState, { type, data }) => {
       const { width, height } = data
 
       return update(state, {
-        dimensions: {
+        resize: {
           $set: {
             width,
             height

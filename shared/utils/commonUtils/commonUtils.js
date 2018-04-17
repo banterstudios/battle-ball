@@ -16,3 +16,7 @@ export const throttle = (func, delay = 100) => {
     }
   }
 }
+
+export const calculateScaleForGame = ({ windowWidth, gameHeight }) => (
+  (windowWidth * 0.5) / gameHeight
+)
