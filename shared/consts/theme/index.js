@@ -26,7 +26,9 @@ module.exports = {
   // Game
   game: {
     width: '480px',
-    height: '240px'
+    height: '240px',
+    heightNoUnit: 240,
+    widthNoUnit: 480
   },
 
   // Media Queries
