@@ -106,11 +106,11 @@ export default class LazyImage extends PureComponent {
     } = props
 
     return useBgImage ? (
-      <BgImage bgImage={src} bgPos={bgPos} bgSize={bgSize} bgRepeat={bgRepeat} {...rest}>
+      <BgImage draggable={false} bgImage={src} bgPos={bgPos} bgSize={bgSize} bgRepeat={bgRepeat} {...rest}>
         { children }
       </BgImage>
     ) : (
-      <Image src={src} alt={alt} {...rest}>
+      <Image draggable={false} src={src} alt={alt} {...rest}>
         { children }
       </Image>
     )
