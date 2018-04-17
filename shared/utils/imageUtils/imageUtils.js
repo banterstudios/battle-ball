@@ -4,8 +4,8 @@
  * @param {string} url - url of the image path
  * @return {Promise}
  */
-export const getImage = (url = '') => {
-  return new Promise((resolve, reject) => {
+export const getImage = (url = '') => (
+  new Promise((resolve, reject) => {
     const img = new Image()
 
     img.onload = () => resolve(img)
@@ -18,4 +18,4 @@ export const getImage = (url = '') => {
       resolve(img)
     }
   })
-}
+)
