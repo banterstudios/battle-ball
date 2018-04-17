@@ -45,6 +45,13 @@ const ANIMATIONS = {
       }
     }),
     query: '1s ease-out forwards'
+  },
+  fadeOut: {
+    name: css.keyframes({
+      from: { opacity: 1 },
+      to: { opacity: 0 }
+    }),
+    query: '0.4s ease-out forwards'
   }
 }
 
