@@ -53,18 +53,7 @@ export default class LazyImage extends PureComponent {
       isLoading: false
     }
 
-    this.imagePromise = null
-  }
-
-  componentWillUnmount () {
-    this.cancelFetchIfFetching()
-  }
-
-  cancelFetchIfFetching () {
-    if (this.imagePromise && this.imagePromise.cancel) {
-      this.imagePromise.cancel()
-      this.imagePromise = null
-    }
+    this.fetchImage = this.fetchImage.bind(this)
   }
 
   handleImageLoad = () => {
@@ -83,16 +72,19 @@ export default class LazyImage extends PureComponent {
     })
   }
 
-  fetchImage (src = this.props.src) {
+  async fetchImage (src = this.props.src) {
     const { loaded, isLoading } = this.state
 
     if (!src || loaded || isLoading) {
       return false
     }
 
-    this.imagePromise = getImage(src)
-      .then(this.handleImageLoad)
-      .catch(this.handleImageError)
+    try {
+      const image = await getImage(src)
+      this.handleImageLoad(image)
+    } catch (e) {
+      this.handleImageError(e)
+    }
   }
 
   componentWillReceiveProps ({ src, isVisible }) {
@@ -101,7 +93,7 @@ export default class LazyImage extends PureComponent {
     }
   }
 
-  renderImage () {
+  renderImage = () => {
     const {
       useBgImage,
       children,
@@ -113,36 +105,26 @@ export default class LazyImage extends PureComponent {
       ...rest
     } = this.props
 
-    const {
-      loaded,
-      error,
-      isLoading
-    } = this.state
-
-    if (!loaded || error || isLoading) {
-      return null
-    }
-
-    return (
-      <ImageContainer loaded={loaded}>
-        {
-          useBgImage
-            ? (
-              <BgImage bgImage={src} bgPos={bgPos} bgSize={bgSize} bgRepeat={bgRepeat} {...rest}>
-                { children }
-              </BgImage>
-            )
-            : (
-              <Image src={src} alt={alt} {...rest}>
-                { children }
-              </Image>
-            )
-        }
-      </ImageContainer>
+    return useBgImage ? (
+      <BgImage bgImage={src} bgPos={bgPos} bgSize={bgSize} bgRepeat={bgRepeat} {...rest}>
+        { children }
+      </BgImage>
+    ) : (
+      <Image src={src} alt={alt} {...rest}>
+        { children }
+      </Image>
     )
   }
 
   render () {
-    return this.renderImage()
+    const { loaded, error, isLoading } = this.state
+
+    return (
+      <ImageContainer loaded={loaded}>
+        {
+          (!loaded || error || isLoading) ? null : this.renderImage()
+        }
+      </ImageContainer>
+    )
   }
 }

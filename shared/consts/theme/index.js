@@ -23,6 +23,12 @@ module.exports = {
   fontSizeMdText: '12px',
   fontSizeSmText: '10px',
 
+  // Game
+  game: {
+    width: '480px',
+    height: '240px'
+  },
+
   // Media Queries
   ...MEDIA_QUERIES,
 

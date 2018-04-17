@@ -3,6 +3,6 @@ import serverSideRender from '../controllers/serverSideRender'
 
 const router = express.Router()
 
-router.get('/', serverSideRender)
+router.get(['/', '/game'], serverSideRender)
 
 export default router

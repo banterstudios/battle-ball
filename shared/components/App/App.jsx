@@ -11,6 +11,7 @@ import themeVariables from '../../consts/theme'
 import MainLayout from '../Layouts/Main'
 
 import Home from '../../views/Home'
+import Game from '../../views/Game'
 import PageNotFound from '../../views/PageNotFound'
 
 export default (props) => {
@@ -19,6 +20,7 @@ export default (props) => {
       <MainLayout>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/game' component={Game} />
           <Route component={PageNotFound} />
         </Switch>
       </MainLayout>
