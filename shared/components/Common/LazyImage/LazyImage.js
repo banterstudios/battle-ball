@@ -93,7 +93,7 @@ export default class LazyImage extends PureComponent {
     }
   }
 
-  renderImage = () => {
+  renderImage = (props) => {
     const {
       useBgImage,
       children,
@@ -103,7 +103,7 @@ export default class LazyImage extends PureComponent {
       bgSize,
       bgRepeat,
       ...rest
-    } = this.props
+    } = props
 
     return useBgImage ? (
       <BgImage bgImage={src} bgPos={bgPos} bgSize={bgSize} bgRepeat={bgRepeat} {...rest}>
@@ -118,11 +118,12 @@ export default class LazyImage extends PureComponent {
 
   render () {
     const { loaded, error, isLoading } = this.state
+    const { className, css, ...rest } = this.props
 
     return (
-      <ImageContainer loaded={loaded}>
+      <ImageContainer loaded={loaded} className={className} css={css}>
         {
-          (!loaded || error || isLoading) ? null : this.renderImage()
+          (!loaded || error || isLoading) ? null : this.renderImage(rest)
         }
       </ImageContainer>
     )
