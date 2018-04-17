@@ -2,6 +2,7 @@ const COLORS = require('./colors')
 const TYPOG = require('./typography')
 const MEDIA_QUERIES = require('./mediaQueries')
 const BREAK_POINTS = require('./breakpoints')
+const { rgba } = require('polished')
 
 module.exports = {
   // Fonts
@@ -11,6 +12,9 @@ module.exports = {
   // Modal
   priorityModalZIndex: 9999,
   modalPrimaryBg: COLORS.offsetWhite,
+
+  // SplashScreen
+  splashScreenBg: COLORS.black,
 
   // font size
   fontSizeTitle: '45px',

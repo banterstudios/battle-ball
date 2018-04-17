@@ -12,6 +12,7 @@ const ImageContainer = glamorous.div(({ loaded }) => ({
 
 const Image = glamorous.img({
   position: 'relative',
+  width: '100%',
   verticalAlign: 'top'
 })
 
