@@ -9,12 +9,17 @@ const StyledView = glamorous.div({
 })
 
 export default class GameView extends Component {
-  state = { active: false, showLoader: true }
+  state = { active: false, showLoader: true, isClient: false }
   componentDidMount () {
+    this.setState({ isClient: true })
     // setTimeout(() => this.setState({ active: true, showLoader: true }), 2000)
   }
   render () {
-    const { showLoader, active } = this.state
+    const { showLoader, active, isClient } = this.state
+
+    if (!isClient) {
+      return null
+    }
 
     return (
       <StyledView>
