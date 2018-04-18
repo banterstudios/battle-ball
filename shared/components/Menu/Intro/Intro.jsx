@@ -4,6 +4,8 @@ import ScaledWrapper from '../../Common/ScaledWrapper'
 import glamorous from 'glamorous'
 import Animation from '../../Animations'
 import PropTypes from 'prop-types'
+import { Spring, Keyframes, animated } from 'react-spring'
+import { TimingAnimation, Easing } from 'react-spring/dist/addons.cjs'
 
 const StyledImageContainer = glamorous.div(({ loaderImgType }) => ({
   position: 'relative',
@@ -51,11 +53,55 @@ export default class Intro extends PureComponent {
   renderLoader = ({ active }) => (
     <Fragment>
       <StyledImageContainer loaderImgType='skull'>
-        <Animation name={active ? 'fadeUpLoaderSkull' : 'pulsate'} active onAnimationEnd={this.composeHandler()}>
+        <Keyframes
+          reset
+          native
+          keys={['pulsate']}
+          impl={TimingAnimation}
+          config={{ duration: 1300, easing: Easing.elastic(3) }}
+          script={async (next) => {
+            while (true) {
+              await next(Spring, {
+                from: {
+                  scale: 1
+                },
+                to: {
+                  scale: 1.03
+                }
+              })
+              await next(Spring, {
+                from: {
+                  scale: 1.03
+                },
+                to: {
+                  scale: 1
+                }
+              })
+            }
+          }}
+        >
+          {
+            ({ scale }) => (
+              <animated.div
+                style={{
+                  position: 'relative',
+                  willChange: 'transform',
+                  transform: scale.interpolate(r => `scale3d(${r}, ${r}, ${r})`)
+                }}
+              >
+                <LazyImage
+                  src='/static/assets/images/menu/skull.png'
+                />
+              </animated.div>
+            )
+          }
+        </Keyframes>
+
+        {/* <Animation name={active ? 'fadeUpLoaderSkull' : 'pulsate'} active onAnimationEnd={this.composeHandler()}>
           <LazyImage
             src='/static/assets/images/menu/skull.png'
           />
-        </Animation>
+        </Animation> */}
       </StyledImageContainer>
       <StyledImageContainer loaderImgType='gangsta'>
         <Animation name='moveLoaderNameUp' active={active}>
