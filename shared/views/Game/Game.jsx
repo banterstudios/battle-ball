@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import glamorous from 'glamorous'
-import SplashScreen from '../../components/SplashScreen'
-import Loader from '../../components/Loader'
 import Intro from '../../components/Menu/Intro'
 
 const StyledView = glamorous.div({
@@ -11,18 +9,23 @@ const StyledView = glamorous.div({
 })
 
 export default class GameView extends Component {
-  state = { active: false, showLoader: false, showSplashScreen: true }
+  state = { active: false, showLoader: true }
   componentDidMount () {
-    setTimeout(() => this.setState({ active: true, showSplashScreen: false, showLoader: true }), 2000)
+    // setTimeout(() => this.setState({ active: true, showLoader: true }), 2000)
   }
   render () {
-    const { showLoader, active, showSplashScreen } = this.state
+    const { showLoader, active } = this.state
 
     return (
       <StyledView>
-        { (showSplashScreen && !active) && <SplashScreen /> }
-        { (!showSplashScreen && showLoader) && <Loader active={active} onLoaderDone={() => { console.log('done'); this.setState({ showLoader: false }) }} /> }
-        { (!showLoader && !showSplashScreen) && <Intro /> }
+        {
+          (showLoader) && (
+            <Intro
+              active={active}
+              onLoaderDone={() => this.setState({ showLoader: false }) }
+            />
+          )
+        }
       </StyledView>
     )
   }

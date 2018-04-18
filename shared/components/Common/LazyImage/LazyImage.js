@@ -56,7 +56,19 @@ export default class LazyImage extends PureComponent {
     this.fetchImage = this.fetchImage.bind(this)
   }
 
+  componentDidMount () {
+    this.hasMounted = true
+  }
+
+  componentWillUnmount () {
+    this.hasMounted = false
+  }
+
   handleImageLoad = () => {
+    if (!this.hasMounted) {
+      return false
+    }
+
     this.setState({
       loaded: true,
       isLoading: false,
@@ -65,6 +77,10 @@ export default class LazyImage extends PureComponent {
   }
 
   handleImageError = () => {
+    if (!this.hasMounted) {
+      return false
+    }
+
     this.setState({
       loaded: false,
       error: true,

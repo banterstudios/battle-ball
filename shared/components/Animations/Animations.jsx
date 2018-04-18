@@ -25,10 +25,10 @@ const ANIMATIONS = {
   moveLoaderNameUp: {
     name: css.keyframes({
       from: {
-        transform: 'translate3d(0,0,0)'
+        transform: 'translate3d(0, 96px, 0)'
       },
       to: {
-        transform: 'translate3d(0,-88px,0)'
+        transform: 'translate3d(0, 0, 0)'
       }
     }),
     query: '1s ease-out forwards'

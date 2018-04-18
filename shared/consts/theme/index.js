@@ -2,7 +2,6 @@ const COLORS = require('./colors')
 const TYPOG = require('./typography')
 const MEDIA_QUERIES = require('./mediaQueries')
 const BREAK_POINTS = require('./breakpoints')
-const { rgba } = require('polished')
 
 module.exports = {
   // Fonts
@@ -31,8 +30,8 @@ module.exports = {
   game: {
     width: '480px',
     height: '240px',
-    heightNoUnit: 240,
-    widthNoUnit: 480
+    widthNoUnit: 480,
+    heightNoUnit: 240
   },
 
   // Media Queries
