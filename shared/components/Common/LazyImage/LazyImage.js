@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { getImage } from '../../../utils/imageUtils'
 import glamorous from 'glamorous'
 
-const ImageContainer = glamorous.div(({ loaded }) => ({
+const ImageContainer = glamorous.div(({ loaded, noAnimation }) => ({
   position: 'relative',
-  opacity: loaded ? 1 : 0,
+  opacity: (loaded || noAnimation) ? 1 : 0,
   transition: 'opacity 0.4s ease-out'
 }))
 
@@ -34,14 +34,16 @@ export default class LazyImage extends PureComponent {
     bgPos: PropTypes.string,
     bgSize: PropTypes.string,
     bgRepeat: PropTypes.string,
-    isVisible: PropTypes.bool
+    isVisible: PropTypes.bool,
+    noAnimation: PropTypes.bool
   }
 
   static defaultProps = {
     useBgImage: false,
     bgPos: 'center',
     bgSize: 'cover',
-    bgRepeat: 'no-repeat'
+    bgRepeat: 'no-repeat',
+    noAnimation: false
   }
 
   constructor (props) {
@@ -134,10 +136,10 @@ export default class LazyImage extends PureComponent {
 
   render () {
     const { loaded, error, isLoading } = this.state
-    const { className, css, ...rest } = this.props
+    const { className, css, noAnimation, ...rest } = this.props
 
     return (
-      <ImageContainer loaded={loaded} className={className} css={css}>
+      <ImageContainer loaded={loaded} noAnimation={noAnimation} className={className} css={css}>
         {
           (!loaded || error || isLoading) ? null : this.renderImage(rest)
         }
