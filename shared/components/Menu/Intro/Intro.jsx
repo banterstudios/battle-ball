@@ -103,7 +103,13 @@ export default class Intro extends PureComponent {
         keys={[1, 2, 3]}>
         {[1, 2, 3].map(item => ({ x, opacity }) => (
           <animated.div
-            style={{ opacity, transform: template`translate3d(${x}%,0,0)`, width: '30%', height: '30px', background: 'orange' }}
+            style={{
+              opacity,
+              transform: x.interpolate((pos) => `translate3d(${pos}%,0,0)`),
+              width: '30%',
+              height: '30px',
+              background: 'orange'
+            }}
           />
         ))}
       </Trail>
