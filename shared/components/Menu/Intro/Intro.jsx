@@ -4,7 +4,7 @@ import ScaledWrapper from '../../Common/ScaledWrapper'
 import glamorous from 'glamorous'
 import PropTypes from 'prop-types'
 import { Pulsate } from '../../Animations'
-import { Spring, Trail, config, animated, template } from 'react-spring'
+import { Spring, Trail, config, animated } from 'react-spring'
 
 const StyledImageContainer = glamorous.div(({ opacity, translateX, translateY }) => ({
   position: 'absolute',
@@ -27,6 +27,20 @@ const StyledIntro = glamorous.div({
   alignItems: 'center',
   width: '100%',
   height: '100%'
+})
+
+const IntroContentWrapper = glamorous.div({
+  position: 'relative',
+  marginTop: 20,
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'row',
+  width: '100%'
+})
+
+const IntroContent = glamorous.div({
+  position: 'relative',
+  width: '50%'
 })
 
 export default class Intro extends PureComponent {
@@ -95,24 +109,33 @@ export default class Intro extends PureComponent {
           src='/static/assets/images/menu/gangsterclaus.png'
         />
       </StyledImageRelativeContainer>
-      <Trail
-        native
-        config={config.gentle}
-        from={{ opacity: 0, x: 100 }}
-        to={{ opacity: 1, x: 0 }}
-        keys={[1, 2, 3]}>
-        {[1, 2, 3].map(item => ({ x, opacity }) => (
-          <animated.div
-            style={{
-              opacity,
-              transform: x.interpolate((pos) => `translate3d(${pos}%,0,0)`),
-              width: '30%',
-              height: '30px',
-              background: 'orange'
-            }}
+      <IntroContentWrapper>
+        <IntroContent css={{ marginLeft: '20%' }}>
+          <LazyImage
+            src='/static/assets/images/menu/santarun.gif'
           />
-        ))}
-      </Trail>
+        </IntroContent>
+        <IntroContent>
+          <Trail
+            native
+            config={config.gentle}
+            from={{ opacity: 0, x: 100 }}
+            to={{ opacity: 1, x: 0 }}
+            keys={[1, 2, 3]}>
+            {[1, 2, 3].map(item => ({ x, opacity }) => (
+              <animated.div
+                style={{
+                  opacity,
+                  transform: x.interpolate((pos) => `translate3d(${pos}%,0,0)`),
+                  width: '100%',
+                  height: '30px',
+                  background: 'orange'
+                }}
+              />
+            ))}
+          </Trail>
+        </IntroContent>
+      </IntroContentWrapper>
     </Fragment>
   )
 
