@@ -6,13 +6,13 @@ import PropTypes from 'prop-types'
 import { Pulsate } from '../../Animations'
 import { Spring, Trail, config, animated } from 'react-spring'
 
-const StyledImageContainer = glamorous.div(({ opacity, translateX, translateY }) => ({
-  position: 'absolute',
-  top: '20px',
-  left: '50%',
-  transform: `translate3d(${translateX}%, ${translateY}%, 0)`,
-  opacity
-}))
+// const StyledImageContainer = glamorous.div(({ opacity, translateX, translateY }) => ({
+//   position: 'absolute',
+//   top: '20px',
+//   left: '50%',
+//   transform: `translate3d(${translateX}%, ${translateY}%, 0)`,
+//   opacity
+// }))
 
 const StyledImageRelativeContainer = glamorous.div({
   position: 'relative',
@@ -43,6 +43,11 @@ const IntroContent = glamorous.div({
   width: '50%'
 })
 
+const customSpringConfig = {
+  tension: 120,
+  friction: 60
+}
+
 export default class Intro extends PureComponent {
   static propTypes = {
     active: PropTypes.bool,
@@ -58,43 +63,50 @@ export default class Intro extends PureComponent {
   renderLoader = ({ active, onEnd }) => (
     <Fragment>
       <Spring
-        config={config.slow}
+        config={customSpringConfig}
         from={{ x: -50, y: 260 }}
         to={{ x: -50, y: active ? 0 : 260 }}
       >
         {
           ({ x, y }) => (
-            <StyledImageContainer
-              translateX={x}
-              translateY={y}
-              opacity={1}
+            <animated.div
+              style={{
+                position: 'absolute',
+                top: '20px',
+                left: '50%',
+                transform: `translate3d(${x}%,${y}%,0)`,
+              }}
             >
               <LazyImage
                 src='/static/assets/images/menu/gangsterclaus.png'
               />
-            </StyledImageContainer>
+            </animated.div>
           )
         }
       </Spring>
       <Spring
-        config={config.slow}
+        config={customSpringConfig}
         from={{ x: -50, y: 0, opacity: 1 }}
         to={{ x: -50, y: active ? -100 : 0, opacity: active ? 0 : 1 }}
         onRest={onEnd}
       >
         {
           ({ x, y, opacity }) => (
-            <StyledImageContainer
-              translateX={x}
-              translateY={y}
-              opacity={opacity}
+            <animated.div
+              style={{
+                position: 'absolute',
+                top: '20px',
+                left: '50%',
+                opacity,
+                transform: `translate3d(${x}%,${y}%,0)`,
+              }}
             >
               <Pulsate disabled={active}>
                 <LazyImage
                   src='/static/assets/images/menu/skull.png'
                 />
               </Pulsate>
-            </StyledImageContainer>
+            </animated.div>
           )
         }
       </Spring>
@@ -119,19 +131,24 @@ export default class Intro extends PureComponent {
           <Trail
             native
             config={config.gentle}
-            from={{ opacity: 0, x: 100 }}
+            from={{ opacity: 0, x: 50 }}
             to={{ opacity: 1, x: 0 }}
             keys={[1, 2, 3]}>
-            {[1, 2, 3].map(item => ({ x, opacity }) => (
+            {['Play', 'Leaderboards', 'Settings'].map(item => ({ x, opacity }) => (
               <animated.div
                 style={{
                   opacity,
                   transform: x.interpolate((pos) => `translate3d(${pos}%,0,0)`),
                   width: '100%',
                   height: '30px',
-                  background: 'orange'
+                  color: '#787878',
+                  display: 'flex',
+                  alignItems: 'center',
+                  paddingLeft: 20
                 }}
-              />
+              >
+                {item}
+              </animated.div>
             ))}
           </Trail>
         </IntroContent>

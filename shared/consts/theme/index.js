@@ -12,6 +12,9 @@ module.exports = {
   priorityModalZIndex: 9999,
   modalPrimaryBg: COLORS.offsetWhite,
 
+  // Menu
+  menuFontColor: COLORS.gray,
+
   // SplashScreen
   splashScreenBg: COLORS.black,
 
