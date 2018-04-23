@@ -44,8 +44,8 @@ const IntroContent = glamorous.div({
 })
 
 const customSpringConfig = {
-  tension: 120,
-  friction: 60
+  tension: 170,
+  friction: 40
 }
 
 export default class Intro extends PureComponent {
