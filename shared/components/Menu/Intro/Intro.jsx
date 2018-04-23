@@ -74,7 +74,7 @@ export default class Intro extends PureComponent {
                 position: 'absolute',
                 top: '20px',
                 left: '50%',
-                transform: `translate3d(${x}%,${y}%,0)`,
+                transform: `translate3d(${x}%,${y}%,0)`
               }}
             >
               <LazyImage
@@ -98,7 +98,7 @@ export default class Intro extends PureComponent {
                 top: '20px',
                 left: '50%',
                 opacity,
-                transform: `translate3d(${x}%,${y}%,0)`,
+                transform: `translate3d(${x}%,${y}%,0)`
               }}
             >
               <Pulsate disabled={active}>
