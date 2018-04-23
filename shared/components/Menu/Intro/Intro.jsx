@@ -44,7 +44,7 @@ const IntroContent = glamorous.div({
 })
 
 const customSpringConfig = {
-  tension: 170,
+  tension: 280,
   friction: 40
 }
 
@@ -123,9 +123,27 @@ export default class Intro extends PureComponent {
       </StyledImageRelativeContainer>
       <IntroContentWrapper>
         <IntroContent css={{ marginLeft: '20%' }}>
-          <LazyImage
-            src='/static/assets/images/menu/santarun.gif'
-          />
+          <Trail
+            native
+            config={config.gentle}
+            from={{ opacity: 0, x: -50 }}
+            to={{ opacity: 1, x: 0 }}
+            keys={[1]}>
+            {[1].map(item => ({ x, opacity }) => (
+              <animated.div
+                style={{
+                  position: 'relative',
+                  opacity,
+                  transform: x.interpolate((pos) => `translate3d(${pos}%,0,0)`),
+                  width: '100%'
+                }}
+              >
+                <LazyImage
+                  src='/static/assets/images/menu/santarun.gif'
+                />
+              </animated.div>
+            ))}
+          </Trail>
         </IntroContent>
         <IntroContent>
           <Trail
