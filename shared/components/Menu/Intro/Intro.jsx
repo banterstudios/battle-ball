@@ -4,10 +4,8 @@ import ScaledWrapper from '../../Common/ScaledWrapper'
 import glamorous from 'glamorous'
 import PropTypes from 'prop-types'
 import { Pulsate } from '../../Animations'
-import { CSSTransition, transit } from 'react-css-transition'
-CSSTransition.childContextTypes = {
-  // this can be empty
-}
+import { Animate } from 'react-move'
+import { easeQuadOut } from 'd3-ease'
 
 const StyledImageRelativeContainer = glamorous.div({
   position: 'relative',
@@ -52,44 +50,64 @@ export default class Intro extends PureComponent {
 
   renderLoader = ({ active, onEnd }) => (
     <Fragment>
-      <CSSTransition
-        style={{
-          position: 'absolute',
-          top: '20px',
-          left: '50%'
-        }}
-        defaultStyle={{ transform: 'translate3d(-50%, 260%, 0)' }}
-        enterStyle={{
-          transform: transit('translate3d(-50%, 0, 0)', 400, 'ease-in-out')
-        }}
-        transitionAppear
-        active={active}
+      <Animate
+        show={!active}
+        start={() => ({
+          y: 260
+        })}
+
+        leave={() => ({
+          y: [0],
+          timing: { duration: 400, ease: easeQuadOut }
+        })}
       >
-        <LazyImage
-          src='/static/assets/images/menu/gangsterclaus.png'
-        />
-      </CSSTransition>
-      <CSSTransition
-        style={{
-          position: 'absolute',
-          top: '20px',
-          left: '50%'
-        }}
-        defaultStyle={{ transform: 'translate3d(-50%, 0, 0)', opacity: 1 }}
-        enterStyle={{
-          transform: transit('translate3d(-50%, -100%, 0)', 400, 'ease-in-out'),
-          opacity: transit(0, 400, 'ease-in-out')
-        }}
-        active={active}
-        transitionAppear
-        onTransitionComplete={onEnd}
+        {({ y }) => (
+          <div
+            style={{
+              position: 'absolute',
+              top: '20px',
+              left: '50%',
+              transform: `translate3d(-50%, ${y}%, 0)`
+            }}
+          >
+            <LazyImage
+              src='/static/assets/images/menu/gangsterclaus.png'
+            />
+          </div>
+        )}
+      </Animate>
+      <Animate
+        show={!active}
+        start={() => ({
+          y: 0,
+          opacity: 1
+        })}
+
+        leave={() => ({
+          y: [100],
+          opacity: [0],
+          timing: { duration: 400, ease: easeQuadOut },
+          events: { end: onEnd }
+        })}
       >
-        <Pulsate disabled={active}>
-          <LazyImage
-            src='/static/assets/images/menu/skull.png'
-          />
-        </Pulsate>
-      </CSSTransition>
+        {({ y, opacity }) => (
+          <div
+            style={{
+              position: 'absolute',
+              top: '20px',
+              left: '50%',
+              transform: `translate3d(-50%, ${-y}%, 0)`,
+              opacity
+            }}
+          >
+            <Pulsate disabled={active}>
+              <LazyImage
+                src='/static/assets/images/menu/skull.png'
+              />
+            </Pulsate>
+          </div>
+        )}
+      </Animate>
     </Fragment>
   )
 
@@ -103,56 +121,69 @@ export default class Intro extends PureComponent {
       </StyledImageRelativeContainer>
       <IntroContentWrapper>
         <IntroContent css={{ marginLeft: '20%' }}>
-          <CSSTransition
-            style={{
-              position: 'relative',
-              width: '100%'
-            }}
-            transitionAppear
-            defaultStyle={{ transform: 'translate3d(-50%, 0, 0)', opacity: 0 }}
-            enterStyle={{
-              transform: transit('translate3d(0, 0, 0)', 300, 'ease-in-out'),
-              opacity: transit(1, 300, 'ease-in-out')
-            }}
-            activeStyle={{
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1
-            }}
-            active
+          <Animate
+            show
+            start={() => ({
+              x: -50,
+              opacity: 0
+            })}
+
+            enter={() => ({
+              x: [0],
+              opacity: [1],
+              timing: { duration: 400, ease: easeQuadOut }
+            })}
           >
-            <LazyImage
-              src='/static/assets/images/menu/santarun.gif'
-            />
-          </CSSTransition>
+            {({ x, opacity }) => (
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  transform: `translate3d(${x}%, 0, 0)`,
+                  opacity
+                }}
+              >
+                <LazyImage
+                  src='/static/assets/images/menu/santarun.gif'
+                />
+              </div>
+            )}
+          </Animate>
         </IntroContent>
         <IntroContent>
           {
             ['Play', 'Leaderboards', 'Settings'].map((item, index) => (
-              <CSSTransition
+              <Animate
                 key={item}
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  height: '30px',
-                  color: '#787878',
-                  display: 'flex',
-                  alignItems: 'center',
-                  paddingLeft: 20
-                }}
-                transitionAppear
-                defaultStyle={{ transform: 'translate3d(50%, 0, 0)', opacity: 0 }}
-                enterStyle={{
-                  transform: transit('translate3d(0, 0, 0)', 300, 'ease-in-out', index * 50),
-                  opacity: transit(1, 300, 'ease-in-out', index * 50)
-                }}
-                activeStyle={{
-                  transform: 'translate3d(0, 0, 0)',
-                  opacity: 1
-                }}
-                active
+                show
+                start={() => ({
+                  x: 50,
+                  opacity: 0
+                })}
+
+                enter={() => ({
+                  x: [0],
+                  opacity: [1],
+                  timing: { duration: 400, ease: easeQuadOut, delay: 50 * index }
+                })}
               >
-                {item}
-              </CSSTransition>
+                {({ x, opacity }) => (
+                  <div
+                    style={{
+                      position: 'relative',
+                      width: '100%',
+                      height: '30px',
+                      color: '#787878',
+                      display: 'flex',
+                      alignItems: 'center',
+                      transform: `translate3d(${x}%, 0, 0)`,
+                      opacity
+                    }}
+                  >
+                    {item}
+                  </div>
+                )}
+              </Animate>
             ))
           }
         </IntroContent>

@@ -1,69 +1,55 @@
 import React, { PureComponent } from 'react'
-import { Spring, Keyframes, animated } from 'react-spring'
-import { TimingAnimation, Easing } from 'react-spring/dist/addons.cjs'
 import PropTypes from 'prop-types'
+import { Animate } from 'react-move'
+import { easeQuadOut } from 'd3-ease'
 
 export default class Pulsate extends PureComponent {
   static propTypes = {
     scaleFrom: PropTypes.number,
     scaleTo: PropTypes.number,
-    duration: PropTypes.number,
-    disabled: PropTypes.bool
+    duration: PropTypes.number
   }
 
   static defaultProps = {
     scaleFrom: 1,
     scaleTo: 1.03,
-    duration: 1300
+    duration: 1000
+  }
+
+  state = { active: true }
+
+  toggleActive = () => {
+    this.setState(({ active }) => ({ active: !active }))
   }
 
   render () {
-    const { duration, scaleFrom, scaleTo, children, disabled } = this.props
+    const { duration, scaleFrom, scaleTo, children } = this.props
+    const { active } = this.state
 
     return (
-      <Keyframes
-        reset
-        native
-        keys={['pulsate']}
-        impl={TimingAnimation}
-        config={{ duration, easing: Easing.elastic(3) }}
-        script={async (next) => {
-          while (true) {
-            await next(Spring, {
-              from: {
-                scale: scaleFrom
-              },
-              to: {
-                scale: scaleTo
-              }
-            })
-            await next(Spring, {
-              from: {
-                scale: scaleTo
-              },
-              to: {
-                scale: scaleFrom
-              }
-            })
-          }
-        }}
+      <Animate
+        start={() => ({
+          scale: scaleFrom
+        })}
+
+        update={() => ({
+          scale: [active ? scaleTo : scaleFrom],
+          timing: { duration, ease: easeQuadOut },
+          events: { end: this.toggleActive }
+        })}
       >
-        {
-          ({ scale }) => (
-            !disabled ? (
-              <animated.div
-                style={{
-                  position: 'relative',
-                  willChange: 'transform',
-                  transform: scale.interpolate(r => `scale3d(${r}, ${r}, ${r})`)
-                }}
-              >
-                {children}
-              </animated.div>
-            ) : children
-          )
-        }
-      </Keyframes>
+        {({ scale }) => (
+          <div
+            style={{
+              position: 'relative',
+              willChange: 'transform',
+              transform: `scale3d(${scale}, ${scale}, ${scale})`
+            }}
+          >
+            {children}
+          </div>
+        )}
+      </Animate>
     )
   }
 }
