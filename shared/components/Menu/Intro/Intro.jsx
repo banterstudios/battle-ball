@@ -4,15 +4,10 @@ import ScaledWrapper from '../../Common/ScaledWrapper'
 import glamorous from 'glamorous'
 import PropTypes from 'prop-types'
 import { Pulsate } from '../../Animations'
-import { Spring, Trail, config, animated } from 'react-spring'
-
-// const StyledImageContainer = glamorous.div(({ opacity, translateX, translateY }) => ({
-//   position: 'absolute',
-//   top: '20px',
-//   left: '50%',
-//   transform: `translate3d(${translateX}%, ${translateY}%, 0)`,
-//   opacity
-// }))
+import { CSSTransition, transit } from 'react-css-transition'
+CSSTransition.childContextTypes = {
+  // this can be empty
+}
 
 const StyledImageRelativeContainer = glamorous.div({
   position: 'relative',
@@ -43,11 +38,6 @@ const IntroContent = glamorous.div({
   width: '50%'
 })
 
-const customSpringConfig = {
-  tension: 280,
-  friction: 40
-}
-
 export default class Intro extends PureComponent {
   static propTypes = {
     active: PropTypes.bool,
@@ -62,54 +52,44 @@ export default class Intro extends PureComponent {
 
   renderLoader = ({ active, onEnd }) => (
     <Fragment>
-      <Spring
-        config={customSpringConfig}
-        from={{ x: -50, y: 260 }}
-        to={{ x: -50, y: active ? 0 : 260 }}
+      <CSSTransition
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '50%'
+        }}
+        defaultStyle={{ transform: 'translate3d(-50%, 260%, 0)' }}
+        enterStyle={{
+          transform: transit('translate3d(-50%, 0, 0)', 400, 'ease-in-out')
+        }}
+        transitionAppear
+        active={active}
       >
-        {
-          ({ x, y }) => (
-            <animated.div
-              style={{
-                position: 'absolute',
-                top: '20px',
-                left: '50%',
-                transform: `translate3d(${x}%,${y}%,0)`
-              }}
-            >
-              <LazyImage
-                src='/static/assets/images/menu/gangsterclaus.png'
-              />
-            </animated.div>
-          )
-        }
-      </Spring>
-      <Spring
-        config={customSpringConfig}
-        from={{ x: -50, y: 0, opacity: 1 }}
-        to={{ x: -50, y: active ? -100 : 0, opacity: active ? 0 : 1 }}
-        onRest={onEnd}
+        <LazyImage
+          src='/static/assets/images/menu/gangsterclaus.png'
+        />
+      </CSSTransition>
+      <CSSTransition
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '50%'
+        }}
+        defaultStyle={{ transform: 'translate3d(-50%, 0, 0)', opacity: 1 }}
+        enterStyle={{
+          transform: transit('translate3d(-50%, -100%, 0)', 400, 'ease-in-out'),
+          opacity: transit(0, 400, 'ease-in-out')
+        }}
+        active={active}
+        transitionAppear
+        onTransitionComplete={onEnd}
       >
-        {
-          ({ x, y, opacity }) => (
-            <animated.div
-              style={{
-                position: 'absolute',
-                top: '20px',
-                left: '50%',
-                opacity,
-                transform: `translate3d(${x}%,${y}%,0)`
-              }}
-            >
-              <Pulsate disabled={active}>
-                <LazyImage
-                  src='/static/assets/images/menu/skull.png'
-                />
-              </Pulsate>
-            </animated.div>
-          )
-        }
-      </Spring>
+        <Pulsate disabled={active}>
+          <LazyImage
+            src='/static/assets/images/menu/skull.png'
+          />
+        </Pulsate>
+      </CSSTransition>
     </Fragment>
   )
 
@@ -123,40 +103,35 @@ export default class Intro extends PureComponent {
       </StyledImageRelativeContainer>
       <IntroContentWrapper>
         <IntroContent css={{ marginLeft: '20%' }}>
-          <Trail
-            native
-            config={config.gentle}
-            from={{ opacity: 0, x: -50 }}
-            to={{ opacity: 1, x: 0 }}
-            keys={[1]}>
-            {[1].map(item => ({ x, opacity }) => (
-              <animated.div
-                style={{
-                  position: 'relative',
-                  opacity,
-                  transform: x.interpolate((pos) => `translate3d(${pos}%,0,0)`),
-                  width: '100%'
-                }}
-              >
-                <LazyImage
-                  src='/static/assets/images/menu/santarun.gif'
-                />
-              </animated.div>
-            ))}
-          </Trail>
+          <CSSTransition
+            style={{
+              position: 'relative',
+              width: '100%'
+            }}
+            transitionAppear
+            defaultStyle={{ transform: 'translate3d(-50%, 0, 0)', opacity: 0 }}
+            enterStyle={{
+              transform: transit('translate3d(0, 0, 0)', 300, 'ease-in-out'),
+              opacity: transit(1, 300, 'ease-in-out')
+            }}
+            activeStyle={{
+              transform: 'translate3d(0, 0, 0)',
+              opacity: 1
+            }}
+            active
+          >
+            <LazyImage
+              src='/static/assets/images/menu/santarun.gif'
+            />
+          </CSSTransition>
         </IntroContent>
         <IntroContent>
-          <Trail
-            native
-            config={config.gentle}
-            from={{ opacity: 0, x: 50 }}
-            to={{ opacity: 1, x: 0 }}
-            keys={[1, 2, 3]}>
-            {['Play', 'Leaderboards', 'Settings'].map(item => ({ x, opacity }) => (
-              <animated.div
+          {
+            ['Play', 'Leaderboards', 'Settings'].map((item, index) => (
+              <CSSTransition
+                key={item}
                 style={{
-                  opacity,
-                  transform: x.interpolate((pos) => `translate3d(${pos}%,0,0)`),
+                  position: 'relative',
                   width: '100%',
                   height: '30px',
                   color: '#787878',
@@ -164,11 +139,22 @@ export default class Intro extends PureComponent {
                   alignItems: 'center',
                   paddingLeft: 20
                 }}
+                transitionAppear
+                defaultStyle={{ transform: 'translate3d(50%, 0, 0)', opacity: 0 }}
+                enterStyle={{
+                  transform: transit('translate3d(0, 0, 0)', 300, 'ease-in-out', index * 50),
+                  opacity: transit(1, 300, 'ease-in-out', index * 50)
+                }}
+                activeStyle={{
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 1
+                }}
+                active
               >
                 {item}
-              </animated.div>
-            ))}
-          </Trail>
+              </CSSTransition>
+            ))
+          }
         </IntroContent>
       </IntroContentWrapper>
     </Fragment>
