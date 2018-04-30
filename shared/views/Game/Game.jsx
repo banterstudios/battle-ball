@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import glamorous from 'glamorous'
 import { Intro, Leaderboard } from '../../components/Menu'
+import GameBoard from '../../components/Game'
 
 const StyledView = glamorous.div({
   position: 'relative',
@@ -23,7 +24,8 @@ export default class GameView extends Component {
 
     return (
       <StyledView>
-        {
+        <GameBoard />
+        {/* {
           (showLoader) && (
             <Intro
               active={active}
@@ -31,7 +33,7 @@ export default class GameView extends Component {
               onEnd={() => { active ? this.setState({ isLoading: false }) : null } }
             />
           )
-        }
+        } */}
       </StyledView>
     )
   }

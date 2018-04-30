@@ -121,7 +121,7 @@ export const testForPassiveScroll = () => {
   return supportsPassiveOption
 }
 
-export const requestAnimationFrame = () => {
+export const requestAnimationFrame = (() => {
   if (!process.browser) {
     return {}
   }
@@ -130,11 +130,11 @@ export const requestAnimationFrame = () => {
     window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
-    ((callback) => setTimeout(callback, 1000 / 60))
+    ((callback, fps = 60) => setTimeout(callback, 1000 / fps))
   )
-}
+})()
 
-export const cancelAnimationFrame = () => {
+export const cancelAnimationFrame = (() => {
   if (!process.browser) {
     return {}
   }
@@ -145,4 +145,4 @@ export const cancelAnimationFrame = () => {
     window.mozCancelAnimationFrame ||
     ((id) => clearTimeout(id))
   )
-}
+})()
