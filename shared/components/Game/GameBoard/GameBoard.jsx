@@ -6,6 +6,7 @@ import { GAME_STATES } from '../../../consts/game'
 
 // Core
 import TimeManager from '../TimeManager'
+import LoadManager from '../LoadManager'
 
 // Utils
 import { requestAnimationFrame, cancelAnimationFrame } from '../../../utils/domUtils'
@@ -24,9 +25,9 @@ export default class GameBoard extends Component {
 
     // Game Variables
     this.timeManager = new TimeManager()
+    this.loadManager = new LoadManager()
   }
 
-  // React lifecycles
   componentDidMount () {
     // Start the game.
     this.loop()
@@ -38,7 +39,7 @@ export default class GameBoard extends Component {
 
   // Game core cycles
   preload = () => {
-    // Load assets like images, sounds, videos etc...
+    this.loadManager.loadAssets([''])
   }
 
   update = (step) => {

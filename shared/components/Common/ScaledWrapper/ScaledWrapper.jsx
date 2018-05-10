@@ -29,6 +29,7 @@ const ScaledWrapper = glamorous.div(({
     height: gameHeight,
     transform: `scale3d(${scaledWidth}, ${scaledHeight}, 1)`,
     transformOrigin: width < gameWidthNoUnit ? 'top left' : 'center',
+    transition: 'transform .2s ease-out',
     background: `url('/static/assets/images/menu/background.png') center / cover no-repeat`
   }
 })
