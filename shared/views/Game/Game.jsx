@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import glamorous from 'glamorous'
-import { Intro, Leaderboard } from '../../components/Menu'
+import { Intro } from '../../components/Menu'
 import GameBoard from '../../components/Game'
 
 const StyledView = glamorous.div({

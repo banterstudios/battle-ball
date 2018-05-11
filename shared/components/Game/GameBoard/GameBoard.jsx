@@ -5,8 +5,8 @@ import React, { Component } from 'react'
 import { GAME_STATES } from '../../../consts/game'
 
 // Core
-import TimeManager from '../TimeManager'
-import LoadManager from '../LoadManager'
+import TimeManager from '../../../game/TimeManager'
+import LoadManager from '../../../game/LoadManager'
 
 // Utils
 import { requestAnimationFrame, cancelAnimationFrame } from '../../../utils/domUtils'
