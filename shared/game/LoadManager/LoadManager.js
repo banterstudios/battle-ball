@@ -1,6 +1,6 @@
-import { isArray } from '../../../utils/objectUtils'
-import { getImage } from '../../../utils/imageUtils'
-import { getAudio } from '../../../utils/audioUtils'
+import { isArray } from '../../utils/objectUtils'
+import { getImage } from '../../utils/imageUtils'
+import { getAudio } from '../../utils/audioUtils'
 
 const IMAGE_REGEX = /(jpeg|jpg|gif|png)$/
 const AUDIO_REGEX = /(wav|mp3|ogg|aac|m4a)$/
