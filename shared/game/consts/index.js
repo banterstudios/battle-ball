@@ -3,4 +3,4 @@ export {
   FPS,
   STEP,
   FRAME_DIVIDER
-} from './game'
+} from './consts'
