@@ -13,6 +13,7 @@ export default class Game {
 
   async start () {
     this.createEntities()
+
     await this.loadAssets()
 
     this.loop()
@@ -22,9 +23,9 @@ export default class Game {
 
   }
 
-  loadAssets () (
-    
-  )
+  loadAssets () {
+    return Promise.resolve()
+  }
 
   update (step) {
     switch (this.gameState) {
