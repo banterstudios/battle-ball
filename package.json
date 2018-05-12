@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=dev node --harmony ./server"
+    "start": "cross-env NODE_ENV=dev node --harmony ./server",
+    "test:jest:watch": "jest --watch",
+    "test:jest": "jest"
   },
   "repository": {
     "type": "git",
@@ -59,6 +61,8 @@
     "file-loader": "^1.1.11",
     "html-webpack-harddisk-plugin": "^0.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.8.3",
     "postcss-loader": "^2.1.3",

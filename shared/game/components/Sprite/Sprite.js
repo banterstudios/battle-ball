@@ -8,6 +8,7 @@ export default class Sprite {
   }
 
   setImage (image) {
+    this.hasLoaded = true
     this.image = image
   }
 }

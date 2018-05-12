@@ -11,9 +11,10 @@ export default class Game {
     this.entities = []
   }
 
-  start () {
+  async start () {
     this.createEntities()
-    this.loadAssets()
+    await this.loadAssets()
+
     this.loop()
   }
 
@@ -21,9 +22,9 @@ export default class Game {
 
   }
 
-  loadAssets () {
-
-  }
+  loadAssets () (
+    
+  )
 
   update (step) {
     switch (this.gameState) {
