@@ -1,5 +1,7 @@
 import { GAME_STATES } from './consts'
-import TimeManager from './managers/TimeManager'
+import { TimeManager } from './managers'
+import { Player } from './entities'
+import { assetLoadSystem } from './systems'
 import { requestAnimationFrame, cancelAnimationFrame } from '../utils/domUtils'
 
 export default class Game {
@@ -20,11 +22,11 @@ export default class Game {
   }
 
   createEntities () {
-
+    this.entities.push(Player())
   }
 
   loadAssets () {
-    return Promise.resolve()
+    return assetLoadSystem(this.entities)
   }
 
   update (step) {
