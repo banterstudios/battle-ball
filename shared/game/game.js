@@ -1,7 +1,6 @@
 import { GAME_STATES } from './consts'
-import { TimeManager } from './managers'
+import { TimeManager, AssetLoadSystem } from './managers'
 import { Player } from './entities'
-import { assetLoadSystem } from './systems'
 import { requestAnimationFrame, cancelAnimationFrame } from '../utils/domUtils'
 
 export default class Game {
@@ -26,11 +25,11 @@ export default class Game {
   }
 
   loadAssets () {
-    return assetLoadSystem(this.entities)
+    return Promise.resolve()
   }
 
-  update (step) {
-    switch (this.gameState) {
+  update = (step) => {
+    switch (this.currentState) {
       case GAME_STATES.PLAY:
         break
 
@@ -46,11 +45,11 @@ export default class Game {
     }
   }
 
-  render () {
+  render = () => {
 
   }
 
-  loop () {
+  loop = () => {
     this.timeManager.run(this.update, this.render)
     this.reqAnimFrameId = requestAnimationFrame(this.loop)
   }

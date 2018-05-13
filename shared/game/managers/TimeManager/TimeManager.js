@@ -1,4 +1,4 @@
-import { FRAME_DIVIDER, STEP } from '../../../consts/game'
+import { FRAME_DIVIDER, STEP } from '../../consts'
 
 export default class TimeManager {
   constructor () {

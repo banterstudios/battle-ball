@@ -11,7 +11,7 @@ export default class Entity {
   }
 
   addComponent (component) {
-    this.components = { ...this.components, [component.name]: component }
+    this.components = { ...this.components, [component.type]: component }
   }
 
   removeComponent (componentName) {

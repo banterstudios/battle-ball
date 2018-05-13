@@ -5,10 +5,10 @@ import { getAudio } from '../../../utils/audioUtils'
 const loadAsset = (component) => {
   switch (component.type) {
     case 'sprite':
-      return getImage(component.url).then(component.setImage)
+      return getImage(component.url).then((image) => component.setImage(image))
 
     case 'audio':
-      return getAudio(component.url).then(component.setAudio)
+      return getAudio(component.url).then((audio) => component.setAudio(audio))
 
     default:
       return null
@@ -23,9 +23,20 @@ const loadAsset = (component) => {
 export default (entities) => (
   Promise.all(
     isArray(entities) ? (
-      entities.reduce((arr, component) => (
-        [...arr, loadAsset(component)]
-      ), [])
+      entities.reduce((arr, { components }) => {
+        const { audio, sprite } = components
+        const assetArr = [...arr]
+
+        if (audio) {
+          assetArr = [...assetArr, loadAsset(audio)]
+        }
+
+        if (sprite) {
+          assetArr = [...assetArr, loadAsset(audio)]
+        }
+
+        return [...arr, loadAsset(components)]
+      }, [])
     ) : []
   )
 )
