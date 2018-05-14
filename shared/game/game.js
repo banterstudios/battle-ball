@@ -9,7 +9,7 @@ export default class Game {
     this.reqAnimFrameId = null
     this.timeManager = new TimeManager()
 
-    this.entities = []
+    this.entities = {}
   }
 
   async start () {
@@ -21,7 +21,8 @@ export default class Game {
   }
 
   createEntities () {
-    this.entities.push(Player())
+    const player = Player()
+    this.entities = { ...this.entities, [player.id]: player }
   }
 
   loadAssets () {
