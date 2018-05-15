@@ -1,6 +1,7 @@
 import {
   clone,
-  path
+  path,
+  omit
 } from '../../../utils/objectUtils'
 
 export default class EntityManager {
@@ -139,13 +140,14 @@ export default class EntityManager {
   }
 
   updateComponentDataForEntity (componentId, entityId, newComponentState) {
-    const currentComponentState = this.getComponentDataForEntity(componentId, entityId)
+    let currentComponentState = this.getComponentDataForEntity(componentId, entityId)
 
-    for (let key in newComponentState) {
-      if (newComponentState.hasOwnProperty(key) && currentComponentState.hasOwnProperty(key)) {
-        currentComponentState[key] = newComponentState[key]
-      }
-    }
+    const safeNewComponentState = omit(newComponentState, ['entityId'])
+
+    currentComponentState = Object.assign(
+      currentComponentState,
+      safeNewComponentState
+    )
   }
 
   getComponentsData (componentId) {
