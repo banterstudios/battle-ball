@@ -1,4 +1,8 @@
-import { allowOnly, omit, checkIfValueIsAllowedOrSetDefault } from './objectUtils'
+import {
+  allowOnly,
+  omit,
+  checkIfValueIsAllowedOrSetDefault
+} from './objectUtils'
 
 describe('utils/objectUtils', () => {
   describe('@omit', () => {

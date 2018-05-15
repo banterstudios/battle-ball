@@ -1,6 +1,6 @@
 import { GAME_STATES } from './consts'
-import { TimeManager, AssetLoadSystem } from './managers'
-import { Player } from './entities'
+import { TimeManager } from './helpers'
+import { EntityManager } from './managers'
 import { requestAnimationFrame, cancelAnimationFrame } from '../utils/domUtils'
 
 export default class Game {
@@ -8,8 +8,7 @@ export default class Game {
     this.currentState = GAME_STATES.LOADER
     this.reqAnimFrameId = null
     this.timeManager = new TimeManager()
-
-    this.entities = {}
+    this.entityManager = new EntityManager()
   }
 
   async start () {
@@ -21,8 +20,6 @@ export default class Game {
   }
 
   createEntities () {
-    const player = Player()
-    this.entities = { ...this.entities, [player.id]: player }
   }
 
   loadAssets () {

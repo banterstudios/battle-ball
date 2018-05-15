@@ -1,1 +1,1 @@
-export { default as TimeManager } from './TimeManager'
+export { default as EntityManager } from './EntityManager'

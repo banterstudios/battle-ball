@@ -6,5 +6,9 @@ export {
   allowOnly,
   omit,
   checkIfValueIsAllowedOrSetDefault,
-  isFunction
+  isFunction,
+  clone,
+  removeFromObjectNoMutation,
+  isDate,
+  path
 } from './objectUtils'
