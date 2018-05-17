@@ -1,1 +1,1 @@
-export { default } from './AssetLoadManager'
+export { default, ASSET_TYPES } from './assetLoadManager'

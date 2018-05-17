@@ -2,41 +2,41 @@ import { isArray } from '../../../utils/objectUtils'
 import { getImage } from '../../../utils/imageUtils'
 import { getAudio } from '../../../utils/audioUtils'
 
-const loadAsset = (component) => {
-  switch (component.type) {
-    case 'sprite':
-      return getImage(component.url).then((image) => component.setImage(image))
+export const ASSET_TYPES = Object.freeze({
+  IMAGE: 'image',
+  AUDIO: 'audio'
+})
 
-    case 'audio':
-      return getAudio(component.url).then((audio) => component.setAudio(audio))
+const loadAssetByType = ({ type, src }) => {
+  switch (type) {
+    case ASSET_TYPES.IMAGE:
+      return getImage(src)
+
+    case ASSET_TYPES.AUDIO:
+      return getAudio(src)
 
     default:
       return null
   }
 }
 
-/**
- * @description Will loop around all entities and load in either a sprite or audio source.
- * @param {Array} entities - Sprite or Audio entities
- * @returns {Promise}
- */
-export default (entities) => (
-  Promise.all(
-    isArray(entities) ? (
-      entities.reduce((arr, { components }) => {
-        const { audio, sprite } = components
-        const assetArr = [...arr]
+function * assetLoadManager (assets) {
+  if (!isArray(assets)) {
+    throw new Error(`Assets is an invalid type: ${typeof assets} - Assets needs to be an array`)
+  }
 
-        if (audio) {
-          assetArr = [...assetArr, loadAsset(audio)]
-        }
+  const totalAssets = []
 
-        if (sprite) {
-          assetArr = [...assetArr, loadAsset(audio)]
-        }
+  for (let i = 0, len = assets.length; i < len; i++) {
+    try {
+      const data = yield [loadAssetByType(assets[i]), i]
+      totalAssets.push(data)
+    } catch (e) {
+      throw new Error(e)
+    }
+  }
 
-        return [...arr, loadAsset(components)]
-      }, [])
-    ) : []
-  )
-)
+  return totalAssets
+}
+
+export default assetLoadManager

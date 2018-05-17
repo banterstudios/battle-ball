@@ -1,7 +1,11 @@
 import { GAME_STATES } from './consts'
-import { TimeManager } from './helpers'
+import { TimeManager, assetLoadManager, ASSET_TYPES } from './helpers'
 import { EntityManager } from './managers'
-import { requestAnimationFrame, cancelAnimationFrame } from '../utils/domUtils'
+import { Player } from './assemblages'
+import {
+  requestAnimationFrame,
+  cancelAnimationFrame
+} from '../utils/domUtils'
 
 export default class Game {
   constructor ({ canvas }) {
@@ -12,18 +16,38 @@ export default class Game {
   }
 
   async start () {
-    this.createEntities()
-
     await this.loadAssets()
 
+    this.addComponents()
+    this.addAssemblages()
+    this.addSystems()
     this.loop()
   }
 
-  createEntities () {
+  async loadAssets () {
+    const assets = [{
+      type: ASSET_TYPES.IMAGE,
+      src: '/public/images/jeff.jpg'
+    }, {
+      type: ASSET_TYPES.IMAGE,
+      src: '/public/images/machinegun.png'
+    }]
+
+    for (const [value, index] of await assetLoadManager(assets)) {
+      console.log(value)
+    }
   }
 
-  loadAssets () {
-    return Promise.resolve()
+  addComponents () {
+    // Add all components
+  }
+
+  addAssemblages () {
+    this.entityManager.addAssemblage(Player.name, Player)
+  }
+
+  addSystems () {
+    // Add all systems
   }
 
   update = (step) => {

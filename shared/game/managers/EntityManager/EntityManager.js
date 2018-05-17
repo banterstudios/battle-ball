@@ -4,6 +4,8 @@ import {
   omit
 } from '../../../utils/objectUtils'
 
+const blackListedProps = ['entityId']
+
 export default class EntityManager {
   constructor () {
     this.entities = []
@@ -142,7 +144,7 @@ export default class EntityManager {
   updateComponentDataForEntity (componentId, entityId, newComponentState) {
     let currentComponentState = this.getComponentDataForEntity(componentId, entityId)
 
-    const safeNewComponentState = omit(newComponentState, ['entityId'])
+    const safeNewComponentState = omit(newComponentState, blackListedProps)
 
     currentComponentState = Object.assign(
       currentComponentState,
