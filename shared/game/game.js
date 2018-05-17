@@ -27,10 +27,10 @@ export default class Game {
   async loadAssets () {
     const assets = [{
       type: ASSET_TYPES.IMAGE,
-      src: '/public/images/jeff.jpg'
+      src: '/static/assets/images/jeff.jpg'
     }, {
       type: ASSET_TYPES.IMAGE,
-      src: '/public/images/machinegun.png'
+      src: '/static/assets/images/machinegun.png'
     }]
 
     for (const [value, index] of await assetLoadManager(assets)) {
