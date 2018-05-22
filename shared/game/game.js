@@ -24,45 +24,31 @@ export default class Game {
     // Managers
     this.timeManager = null
     this.entityManager = null
-    this.assetManagement = null
-    this.gameStateManagement = null
+    this.assetManager = null
+    this.stateManager = null
 
     this.start()
   }
 
-  get gameProps () {
-    const {
-      entityManager,
-      assetManagement: asset,
-      gameStateManagement: state
-    } = this
-
-    return {
-      entityManager,
-      asset,
-      state
-    }
-  }
-
   start () {
     this.createManagers()
-    this.initCallback(this.gameProps)
+    this.initCallback(this)
     this.loop()
   }
 
   createManagers () {
     this.timeManager = new TimeManager()
     this.entityManager = new EntityManager()
-    this.assetManagement = new AssetManager()
-    this.gameStateManagement = new GameStateManager(this.gameProps)
+    this.assetManager = new AssetManager()
+    this.stateManager = new GameStateManager(this)
   }
 
   update = (step) => {
-    this.gameStateManagement.update(step)
+    this.stateManager.update(step)
   }
 
   render = (delta) => {
-    this.gameStateManagement.render(delta)
+    this.stateManager.render(delta)
   }
 
   loop = () => {

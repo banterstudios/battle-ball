@@ -1,3 +1,5 @@
+import isDev from 'isdev'
+
 export default class GameStateManager {
   constructor (game) {
     this.currentGameState = null
@@ -5,26 +7,34 @@ export default class GameStateManager {
     this.game = game
   }
 
-  add (name, state) {
-    return this.gameStates.set(name, state)
+  add (name, State) {
+    if (this.gameStates.has(name)) {
+      if (isDev) {
+        console.warn(`You're trying to add to an existing state.`)
+      }
+
+      return false
+    }
+
+    return this.gameStates.set(name, new State({ game: this.game }))
   }
 
   remove (name) {
     return this.gameStates.delete(name)
   }
 
-  destroyCurrentGameState () {
-    if (this.currentGameState) {
-      if (this.currentGameState.destroy) {
-        this.currentGameState.destroy()
-      }
+  safelyDestroyCurrentGameState () {
+    const { gameStates, currentGameState } = this
 
-      this.currentGameState = null
+    const { destroy } = gameStates.get(currentGameState) || {}
+
+    if (destroy) {
+      destroy()
     }
   }
 
-  start (name, props) {
-    const { gameStates, game } = this
+  start (name) {
+    const { gameStates } = this
 
     const StateToStart = gameStates.get(name)
 
@@ -32,13 +42,15 @@ export default class GameStateManager {
       throw new Error(`You're trying to start a state that has not been set: ${name}`)
     }
 
-    this.destroyCurrentGameState()
+    this.safelyDestroyCurrentGameState()
 
-    this.currentGameState = new StateToStart({ props, game })
+    this.currentGameState = name
+
+    StateToStart.init()
   }
 
   update (step) {
-    const { currentGameState: { update } = {} } = this
+    const { update } = this.gameStates.get(this.currentGameState) || {}
 
     if (update) {
       update(step)
@@ -46,7 +58,7 @@ export default class GameStateManager {
   }
 
   render (delta) {
-    const { currentGameState: { render } = {} } = this
+    const { render } = this.gameStates.get(this.currentGameState) || {}
 
     if (render) {
       render(delta)

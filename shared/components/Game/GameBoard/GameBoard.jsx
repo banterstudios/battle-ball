@@ -17,11 +17,13 @@ export default class GameBoard extends Component {
     })
   }
 
-  initGame = ({ state }) => {
-    state.add('boot', Boot)
-    state.add('play', Play)
+  initGame = (game) => {
+    const { stateManager } = game
 
-    state.start('boot')
+    stateManager.add('boot', Boot)
+    stateManager.add('play', Play)
+
+    stateManager.start('boot')
   }
 
   componentWillUnmount () {

@@ -1,14 +1,17 @@
 export default class Boot {
-  constructor () {
+  constructor ({ game }) {
+    this.game = game
   }
 
   init () {
-
   }
 
   update () {
   }
 
   render () {
+  }
+
+  destroy () {
   }
 }
