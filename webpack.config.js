@@ -23,6 +23,7 @@ const CopyWebpackPluginConfig = new CopyWebpackPlugin([{
 
 module.exports = {
   name: 'client',
+  target: 'web',
   mode: 'development',
   entry: [
     'babel-polyfill',

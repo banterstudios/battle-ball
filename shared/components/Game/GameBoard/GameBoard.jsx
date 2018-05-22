@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Game from '../../../game'
+import { Boot, Play } from '../../../game/states'
 
 export default class GameBoard extends Component {
   constructor (props) {
@@ -10,8 +11,17 @@ export default class GameBoard extends Component {
   }
 
   componentDidMount () {
-    this.game = new Game({ canvas: this.gameRef })
-    this.game.start()
+    this.game = new Game({
+      canvas: this.gameRef,
+      init: this.initGame
+    })
+  }
+
+  initGame = ({ state }) => {
+    state.add('boot', Boot)
+    state.add('play', Play)
+
+    state.start('boot')
   }
 
   componentWillUnmount () {

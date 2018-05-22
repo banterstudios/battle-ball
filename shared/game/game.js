@@ -1,74 +1,68 @@
-import { GAME_STATES } from './consts'
-import { TimeManager, assetLoadManager, ASSET_TYPES } from './helpers'
-import { EntityManager } from './managers'
-import { Player } from './assemblages'
+import {
+  EntityManager,
+  TimeManager,
+  AssetManager,
+  GameStateManager
+} from './managers'
+
 import {
   requestAnimationFrame,
   cancelAnimationFrame
 } from '../utils/domUtils'
 
+const noop = () => {}
+
 export default class Game {
-  constructor ({ canvas }) {
-    this.currentState = GAME_STATES.LOADER
+  constructor ({ canvas, init }) {
+    // Dom related st00f
+    this.canvas = canvas
     this.reqAnimFrameId = null
-    this.timeManager = new TimeManager()
-    this.entityManager = new EntityManager()
+
+    // Callbacks
+    this.initCallback = init || noop
+
+    // Managers
+    this.timeManager = null
+    this.entityManager = null
+    this.assetManagement = null
+    this.gameStateManagement = null
+
+    this.start()
   }
 
-  async start () {
-    await this.loadAssets()
+  get gameProps () {
+    const {
+      entityManager,
+      assetManagement: asset,
+      gameStateManagement: state
+    } = this
 
-    this.addComponents()
-    this.addAssemblages()
-    this.addSystems()
+    return {
+      entityManager,
+      asset,
+      state
+    }
+  }
+
+  start () {
+    this.createManagers()
+    this.initCallback(this.gameProps)
     this.loop()
   }
 
-  async loadAssets () {
-    const assets = [{
-      type: ASSET_TYPES.IMAGE,
-      src: '/static/assets/images/jeff.jpg'
-    }, {
-      type: ASSET_TYPES.IMAGE,
-      src: '/static/assets/images/machinegun.png'
-    }]
-
-    for (const [value, index] of await assetLoadManager(assets)) {
-      console.log(value)
-    }
-  }
-
-  addComponents () {
-    // Add all components
-  }
-
-  addAssemblages () {
-    this.entityManager.addAssemblage(Player.name, Player)
-  }
-
-  addSystems () {
-    // Add all systems
+  createManagers () {
+    this.timeManager = new TimeManager()
+    this.entityManager = new EntityManager()
+    this.assetManagement = new AssetManager()
+    this.gameStateManagement = new GameStateManager(this.gameProps)
   }
 
   update = (step) => {
-    switch (this.currentState) {
-      case GAME_STATES.PLAY:
-        break
-
-      case GAME_STATES.MENU:
-        this.timeManager.reset()
-        break
-
-      case GAME_STATES.END:
-        break
-
-      case GAME_STATES.LOADER:
-        break
-    }
+    this.gameStateManagement.update(step)
   }
 
-  render = () => {
-
+  render = (delta) => {
+    this.gameStateManagement.render(delta)
   }
 
   loop = () => {

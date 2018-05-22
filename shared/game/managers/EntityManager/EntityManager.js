@@ -142,7 +142,7 @@ export default class EntityManager {
   }
 
   updateComponentDataForEntity (componentId, entityId, newComponentState) {
-    let currentComponentState = this.getComponentDataForEntity(componentId, entityId)
+    let currentComponentState = this.getComponentDataForEntity(componentId, entityId) // eslint-disable-line no-unused-vars
 
     const safeNewComponentState = omit(newComponentState, blackListedProps)
 
@@ -217,6 +217,6 @@ export default class EntityManager {
   }
 
   update (dt) {
-    this.systems.forEach(system => system.update(dt))
+    this.systems.forEach((system) => system.update(dt))
   }
 }
