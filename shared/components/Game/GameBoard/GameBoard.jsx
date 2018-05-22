@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import Game from '../../../game'
-import { Boot, Play } from '../../../game/states'
+import {
+  Boot,
+  Play,
+  Preload
+} from '../../../game/states'
 
 export default class GameBoard extends Component {
   constructor (props) {
@@ -18,9 +22,10 @@ export default class GameBoard extends Component {
   }
 
   initGame = (game) => {
-    const { stateManager } = game
+    const { stateManager, subscribeManager } = game
 
     stateManager.add('boot', Boot)
+    stateManager.add('preload', Preload)
     stateManager.add('play', Play)
 
     stateManager.start('boot')

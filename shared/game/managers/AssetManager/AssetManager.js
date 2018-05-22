@@ -1,11 +1,15 @@
 import { isArray } from '../../../utils/objectUtils'
 import { getImage } from '../../../utils/imageUtils'
 import { getAudio } from '../../../utils/audioUtils'
+import { ASSET_TYPES } from '../../consts'
 
-export const ASSET_TYPES = Object.freeze({
-  IMAGE: 'image',
-  AUDIO: 'audio'
-})
+const checkAssetValidity = (assets) => {
+  if (!isArray(assets)) {
+    throw new Error(`Assets is an invalid type: ${typeof assets} - Assets needs to be an array`)
+  }
+
+  return true
+}
 
 const loadAssetByType = ({ type, src }) => {
   switch (type) {
@@ -26,10 +30,12 @@ export default class AssetManager {
     this.assets = new Map()
   }
 
-  * loadAsset (assets) {
-    if (!isArray(assets)) {
-      throw new Error(`Assets is an invalid type: ${typeof assets} - Assets needs to be an array`)
-    }
+  /**
+   * @description Really good for splash screen shit.
+   * @param {Array} assets
+   */
+  * loadGeneratorAsset (assets) {
+    checkAssetValidity(assets)
 
     for (let i = 0, len = assets.length; i < len; i++) {
       try {

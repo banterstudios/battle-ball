@@ -4,6 +4,7 @@ export default class Boot {
   }
 
   init () {
+    this.game.stateManager.start('preload')
   }
 
   update () {

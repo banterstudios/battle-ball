@@ -16,3 +16,8 @@ export const FRAME_DIVIDER = 1000
 export const PUB_SUB = Object.freeze({
   UPDATE_STATE: 0
 })
+
+export const ASSET_TYPES = Object.freeze({
+  IMAGE: 'image',
+  AUDIO: 'audio'
+})

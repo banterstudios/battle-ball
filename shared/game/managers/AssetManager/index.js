@@ -1,1 +1,1 @@
-export { default, ASSET_TYPES } from './AssetManager'
+export { default } from './AssetManager'
