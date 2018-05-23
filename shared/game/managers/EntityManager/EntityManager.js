@@ -216,7 +216,16 @@ export default class EntityManager {
     this.systems = this.systems.filter((system) => system !== systemToRemove)
   }
 
-  update (dt) {
-    this.systems.forEach((system) => system.update(dt))
+  update (step) {
+    this.systems.forEach((system) => system.update(step))
+  }
+
+  destroy () {
+    this.entities = null
+    this.components = null
+    this.assemblages = null
+    this.entityComponentData = null
+    this.systems = null
+    this.uid = null
   }
 }

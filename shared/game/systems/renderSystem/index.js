@@ -1,1 +1,1 @@
-export { default } from './renderSystem'
+export { default } from './RenderSystem'

@@ -1,1 +1,2 @@
-export { default as renderSystem } from './renderSystem'
+export { default as RenderSystem } from './RenderSystem'
+export { default as PhysicsSystem } from './PhysicsSystem'
