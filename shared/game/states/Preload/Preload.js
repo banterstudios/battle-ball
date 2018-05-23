@@ -17,9 +17,11 @@ export default class Preload {
   }
 
   async init () {
-    const { assetManager } = this.game
-
-    for (const [, loadedAssetsAmount] of await assetManager.loadGeneratorAsset(assetsToPreload)) {
+    for (
+      const [, loadedAssetsAmount]
+      of await this.game.assetManager.loadGeneratorAsset(assetsToPreload)
+    ) {
+      console.log(loadedAssetsAmount)
       this.totalAssetsLoaded = loadedAssetsAmount
     }
 
@@ -32,7 +34,7 @@ export default class Preload {
   }
 
   update () {
-    const percent = (this.totalAssets / this.totalAssetsLoaded)
+    const percent = ((this.totalAssets / this.totalAssetsLoaded) * 100)
 
     console.log(`Percent done: ${percent}%`)
   }
