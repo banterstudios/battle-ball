@@ -26,19 +26,19 @@ export default class GameStateManager {
   safelyDestroyCurrentGameState () {
     const { gameStates, currentGameState } = this
 
-    const { destroy } = gameStates.get(currentGameState) || {}
+    const state = gameStates.get(currentGameState) || {}
 
-    if (destroy) {
-      destroy()
+    if (state.destroy) {
+      state.destroy()
     }
   }
 
   start (name) {
     const { gameStates } = this
 
-    const StateToStart = gameStates.get(name)
+    const stateToStart = gameStates.get(name)
 
-    if (!StateToStart) {
+    if (!stateToStart) {
       throw new Error(`You're trying to start a state that has not been set: ${name}`)
     }
 
@@ -46,7 +46,9 @@ export default class GameStateManager {
 
     this.currentGameState = name
 
-    StateToStart.init()
+    if (stateToStart.init) {
+      stateToStart.init()
+    }
   }
 
   update (step) {
