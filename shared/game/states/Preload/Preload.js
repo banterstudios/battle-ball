@@ -14,7 +14,6 @@ export default class Preload {
     this.game = game
     this.totalAssets = assetsToPreload.length
     this.totalAssetsLoaded = 0
-    this.done = false
   }
 
   async init () {
@@ -25,6 +24,7 @@ export default class Preload {
     }
 
     if (isDev) {
+      console.warn('If there was an error loading an asset, currently we do not handle it!')
       console.log('Done preloading')
     }
 

@@ -23,7 +23,7 @@ export default class Game {
 
     // Managers
     this.timeManager = null
-    this.entityManager = null
+    this.globalEntityManager = null
     this.assetManager = null
     this.stateManager = null
 
@@ -38,7 +38,7 @@ export default class Game {
 
   createManagers () {
     this.timeManager = new TimeManager()
-    this.entityManager = new EntityManager()
+    this.globalEntityManager = new EntityManager()
     this.assetManager = new AssetManager()
     this.stateManager = new GameStateManager(this)
   }
