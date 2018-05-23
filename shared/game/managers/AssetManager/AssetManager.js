@@ -26,7 +26,6 @@ const loadAssetByType = ({ type, src }) => {
 
 export default class AssetManager {
   constructor () {
-    this.isLoading = false
     this.assets = new Map()
   }
 
