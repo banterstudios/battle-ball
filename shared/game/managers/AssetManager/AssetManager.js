@@ -40,7 +40,7 @@ export default class AssetManager {
     for (let i = 0, len = assets.length; i < len; i++) {
       try {
         const asset = assets[i]
-        const data = yield [loadAssetByType(asset), i]
+        const data = yield [loadAssetByType(asset), i + 1]
         this.assets.set(asset.name, data)
       } catch (e) {
         throw new Error(e)

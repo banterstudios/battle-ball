@@ -22,7 +22,7 @@ export default class GameBoard extends Component {
   }
 
   initGame = (game) => {
-    const { stateManager, subscribeManager } = game
+    const { stateManager } = game
 
     stateManager.add('boot', Boot)
     stateManager.add('preload', Preload)

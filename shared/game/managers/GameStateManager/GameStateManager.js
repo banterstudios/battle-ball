@@ -50,18 +50,18 @@ export default class GameStateManager {
   }
 
   update (step) {
-    const { update } = this.gameStates.get(this.currentGameState) || {}
+    const state = this.gameStates.get(this.currentGameState) || {}
 
-    if (update) {
-      update(step)
+    if (state.update) {
+      state.update(step)
     }
   }
 
   render (delta) {
-    const { render } = this.gameStates.get(this.currentGameState) || {}
+    const state = this.gameStates.get(this.currentGameState) || {}
 
-    if (render) {
-      render(delta)
+    if (state.render) {
+      state.render(delta)
     }
   }
 }

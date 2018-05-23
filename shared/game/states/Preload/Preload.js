@@ -20,7 +20,7 @@ export default class Preload {
   async init () {
     const { assetManager } = this.game
 
-    for (const [, loadedAssetsAmount] of await assetManager(assetsToPreload)) {
+    for (const [, loadedAssetsAmount] of await assetManager.loadGeneratorAsset(assetsToPreload)) {
       this.totalAssetsLoaded = loadedAssetsAmount
     }
 

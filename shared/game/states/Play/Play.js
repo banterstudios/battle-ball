@@ -4,6 +4,7 @@ export default class Play {
   }
 
   init () {
+    console.log('play time')
   }
 
   update () {
