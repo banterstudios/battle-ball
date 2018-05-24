@@ -31,7 +31,9 @@ export default class Preload {
   update () {
     const percent = (100 / (this.totalAssets / this.totalAssetsLoaded))
 
-    console.log(`Percent done: ${percent}%`)
+    if (isDev) {
+      console.log(`Percent done: ${percent}%`)
+    }
   }
 
   render () {
