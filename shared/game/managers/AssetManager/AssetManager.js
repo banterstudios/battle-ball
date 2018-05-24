@@ -33,14 +33,18 @@ export default class AssetManager {
    * @description Really good for splash screen shit.
    * @param {Array} assets
    */
-  * loadGeneratorAsset (assets) {
+  async loadAssets (assets, progressUpdateCallback) {
     checkAssetValidity(assets)
 
-    for (let i = 0, len = assets.length; i < len; i++) {
+    for (const asset of assets) {
       try {
-        const asset = assets[i]
-        const data = yield [loadAssetByType(asset), i + 1]
+        const data = await loadAssetByType(asset)
+
         this.assets.set(asset.name, data)
+
+        if (progressUpdateCallback) {
+          progressUpdateCallback(data)
+        }
       } catch (e) {
         throw new Error(e)
       }

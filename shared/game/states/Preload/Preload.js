@@ -3,10 +3,10 @@ import isDev from 'isdev'
 
 const assetsToPreload = [{
   type: ASSET_TYPES.IMAGE,
-  src: '/static/assets/images/charactergood.png'
+  src: '/static/assets/images/badsky.png'
 }, {
   type: ASSET_TYPES.IMAGE,
-  src: '/static/assets/images/characterbad.png'
+  src: '/static/assets/images/badtile.png'
 }]
 
 export default class Preload {
@@ -17,16 +17,11 @@ export default class Preload {
   }
 
   async init () {
-    for (
-      const [, loadedAssetsAmount]
-      of await this.game.assetManager.loadGeneratorAsset(assetsToPreload)
-    ) {
-      console.log(loadedAssetsAmount)
-      this.totalAssetsLoaded = loadedAssetsAmount
-    }
+    await this.game.assetManager.loadAssets(assetsToPreload, () => {
+      this.totalAssetsLoaded++
+    })
 
     if (isDev) {
-      console.warn('If there was an error loading an asset, currently we do not handle it!')
       console.log('Done preloading')
     }
 
@@ -34,7 +29,7 @@ export default class Preload {
   }
 
   update () {
-    const percent = ((this.totalAssets / this.totalAssetsLoaded) * 100)
+    const percent = (100 / (this.totalAssets / this.totalAssetsLoaded))
 
     console.log(`Percent done: ${percent}%`)
   }
