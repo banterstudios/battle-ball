@@ -1,11 +1,20 @@
-export default class RenderSystem {
+export default class MapSystem {
   constructor ({ manager, game }) {
     this.manager = manager
     this.game = game
+
+    this.init()
+  }
+
+  init () {
+   this.createFloorTiles()
+  }
+
+  createFloorTiles () {
+    
   }
 
   renderScene () {
-    let tiles = this.manager.getComponentsData('tile')
   }
 
   update (delta) {

@@ -3,10 +3,7 @@ import isDev from 'isdev'
 
 const assetsToPreload = [{
   type: ASSET_TYPES.IMAGE,
-  src: '/static/assets/images/badsky.png'
-}, {
-  type: ASSET_TYPES.IMAGE,
-  src: '/static/assets/images/badtile.png'
+  src: '/static/assets/images/battleball/tiles/floor.png'
 }]
 
 export default class Preload {
@@ -28,15 +25,7 @@ export default class Preload {
     this.game.stateManager.start('play')
   }
 
-  update () {
-    const percent = (100 / (this.totalAssets / this.totalAssetsLoaded))
+  update () {}
 
-    if (isDev) {
-      console.log(`Percent done: ${percent}%`)
-    }
-  }
-
-  render () {
-    // Render out the splash screen!
-  }
+  render () {}
 }
