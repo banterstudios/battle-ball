@@ -1,7 +1,7 @@
 import { EntityManager } from '../../managers'
 import { Moveable, Sprite, Position } from '../../components'
 import { FloorTile } from '../../assemblages'
-import { RenderSystem } from '../../systems'
+import { RenderSystem, MapSystem } from '../../systems'
 
 export default class Play {
   constructor ({ game }) {
@@ -13,7 +13,6 @@ export default class Play {
 
     this.addComponents()
     this.addAssemblages()
-    this.addEntities()
     this.addSystems()
   }
 
@@ -27,11 +26,9 @@ export default class Play {
     this.manager.addAssemblage(FloorTile.name, FloorTile)
   }
 
-  addEntities () {
-  }
-
   addSystems () {
-    this.manager.addSystems(new RenderSystem({ manager: this.manager, game: this.game }))
+    this.manager.addSystem(new MapSystem({ manager: this.manager, game: this.game }))
+    this.manager.addSystem(new RenderSystem({ manager: this.manager, game: this.game }))
   }
 
   render (delta) {

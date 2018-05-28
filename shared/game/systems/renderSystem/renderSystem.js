@@ -5,7 +5,6 @@ export default class RenderSystem {
   }
 
   renderScene () {
-    let tiles = this.manager.getComponentsData('tile')
   }
 
   update (delta) {

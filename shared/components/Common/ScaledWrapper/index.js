@@ -1,1 +1,1 @@
-export { default } from './ScaledWrapper'
+export { default, withScaledWrapper } from './ScaledWrapper'

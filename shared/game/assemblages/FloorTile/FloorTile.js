@@ -2,13 +2,15 @@ export default {
   name: 'FloorTile',
   description: 'Floor tile for battleball',
   components: [
-    'Movable',
+    'Moveable',
     'Position',
     'Sprite'
   ],
   initialState: {
     Sprite: {
-      name: 'floortile'
+      name: 'floorTile',
+      width: 90,
+      height: 45
     }
   }
 }

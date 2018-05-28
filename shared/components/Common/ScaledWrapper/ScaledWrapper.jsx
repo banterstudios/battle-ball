@@ -1,8 +1,9 @@
-import glamorous from 'glamorous'
+import React, { Component } from 'react'
+import glamorous, { withTheme } from 'glamorous'
 import listenToWindowEvents from '../../../redux/containers/ListenToWindowEvents'
 import { calculateScaleForGame } from '../../../utils/commonUtils'
 
-const ScaledWrapper = glamorous.div(({
+const generateStyleProps = ({
   theme: {
     game: {
       width: gameWidth,
@@ -31,6 +32,32 @@ const ScaledWrapper = glamorous.div(({
     transformOrigin: width < gameWidthNoUnit ? 'top left' : 'center',
     background: `url('/static/assets/images/menu/background.png') center / cover no-repeat`
   }
-})
+}
+
+const ScaledWrapper = glamorous.div(generateStyleProps)
 
 export default listenToWindowEvents({ eventTypes: ['resize'] })(ScaledWrapper)
+
+export const withScaledWrapper = (WrappedComponent) => {
+  class WithScaledWrapper extends Component {
+    render () {
+      const {
+        theme: {
+          game: {
+            heightNoUnit,
+            widthNoUnit
+          }
+        },
+        resize: { width, height } = {}
+      } = this.props
+
+      const gameDimensions = calculateScaleForGame({ gameHeight: heightNoUnit, gameWidth: widthNoUnit, windowWidth: width, windowHeight: height })
+
+      return <WrappedComponent
+        gameWidth={widthNoUnit * gameDimensions.width}
+        gameHeight={heightNoUnit * gameDimensions.height} />
+    }
+  }
+
+  return listenToWindowEvents({ eventTypes: ['resize'] })(withTheme(WithScaledWrapper))
+}

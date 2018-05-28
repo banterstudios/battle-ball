@@ -49,14 +49,12 @@ export default class EntityManager {
   }
 
   removeEntity (entityId) {
-    let { entityComponentData } = this
-
-    for (let componentId in entityComponentData) {
+    for (let componentId in this.entityComponentData) {
       if (
-        entityComponentData.hasOwnProperty(componentId) &&
-        entityComponentData[componentId][entityId]
+        this.entityComponentData.hasOwnProperty(componentId) &&
+        this.entityComponentData[componentId][entityId]
       ) {
-        delete entityComponentData[componentId][entityId]
+        delete this.entityComponentData[componentId][entityId]
       }
     }
 
@@ -78,15 +76,9 @@ export default class EntityManager {
   }
 
   addComponentsToEntity (componentIds, entityId) {
-    const { components, entities } = this
-
     componentIds.forEach((componentId) => {
-      if (!components[componentId]) {
+      if (!this.components[componentId]) {
         throw new Error(`Trying to use unknown component: ${componentId}`)
-      }
-
-      if (!entities.includes(entityId)) {
-        throw new Error(`Trying to use unknown entity: ${entityId}`)
       }
 
       if (!this.entityComponentData[componentId]) {
@@ -101,10 +93,8 @@ export default class EntityManager {
   }
 
   removeComponentsFromEntity (componentIds, entityId) {
-    const { components } = this
-
     componentIds.forEach((componentId) => {
-      if (!components[componentId]) {
+      if (!this.components[componentId]) {
         throw new Error(`Trying to use unknown component: ${componentId}`)
       }
 
@@ -115,15 +105,13 @@ export default class EntityManager {
   }
 
   doesComponentExist (componentId, entityId) {
-    const { components, entityComponentData } = this
-
-    if (!components[componentId]) {
+    if (!this.components[componentId]) {
       return false
     }
 
     if (
-      !entityComponentData.hasOwnProperty(componentId) ||
-      !entityComponentData[componentId].hasOwnProperty(entityId)
+      !this.entityComponentData.hasOwnProperty(componentId) ||
+      !this.entityComponentData[componentId].hasOwnProperty(entityId)
     ) {
       return false
     }
@@ -132,13 +120,11 @@ export default class EntityManager {
   }
 
   getComponentDataForEntity (componentId, entityId) {
-    const { entityComponentData, doesComponentExist } = this
-
-    if (!doesComponentExist(componentId, entityId)) {
+    if (!this.doesComponentExist(componentId, entityId)) {
       throw new Error(`No data for component: ${componentId} and/or entity ${entityId}`)
     }
 
-    return entityComponentData[componentId][entityId]
+    return this.entityComponentData[componentId][entityId]
   }
 
   updateComponentDataForEntity (componentId, entityId, newComponentState) {
@@ -208,7 +194,7 @@ export default class EntityManager {
   }
 
   // Systems
-  addsystem (system) {
+  addSystem (system) {
     this.systems.push(system)
   }
 

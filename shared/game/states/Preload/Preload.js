@@ -3,7 +3,8 @@ import isDev from 'isdev'
 
 const assetsToPreload = [{
   type: ASSET_TYPES.IMAGE,
-  src: '/static/assets/images/battleball/tiles/floor.png'
+  name: 'floorTile',
+  src: '/static/assets/images/battleball/tiles/floor_flat.png'
 }]
 
 export default class Preload {
