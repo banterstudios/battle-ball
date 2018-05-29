@@ -71,10 +71,6 @@ export default class MapSystem {
         this.tiles.push(floorTile)
       }
     }
-
-    if (isDev) {
-      window.mapManager = this.manager
-    }
   }
 
   renderScene () {
