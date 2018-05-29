@@ -16,3 +16,13 @@ export const isInView = ({ x, y, gameWidth, gameHeight, height, width }) => (
   y >= gameHeight ||
   y + height <= 0)
 )
+export const setFullScreen = () => {
+  const doc = window.document
+  const docEl = doc.documentElement
+
+  const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen
+
+  if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+    requestFullScreen.call(docEl)
+  }
+}
