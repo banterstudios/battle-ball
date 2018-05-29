@@ -1,7 +1,7 @@
 import { EntityManager } from '../../managers'
-import { Moveable, Sprite, Position, BoundingBox } from '../../components'
+import { Moveable, Sprite, Position, BoundingBox, Input } from '../../components'
 import { FloorTile, IsometricCamera } from '../../assemblages'
-import { RenderSystem, MapSystem } from '../../systems'
+import { RenderSystem, MapSystem, InputSystem } from '../../systems'
 
 export default class Play {
   constructor ({ game }) {
@@ -23,6 +23,7 @@ export default class Play {
     this.manager.addComponent(Sprite.name, Sprite)
     this.manager.addComponent(Position.name, Position)
     this.manager.addComponent(BoundingBox.name, BoundingBox)
+    this.manager.addComponent(Input.name, Input)
   }
 
   addAssemblages () {
@@ -40,6 +41,7 @@ export default class Play {
   }
 
   addSystems () {
+    this.manager.addSystem(new InputSystem({ manager: this.manager, game: this.game }))
     this.manager.addSystem(new MapSystem({ manager: this.manager, game: this.game, camera: this.camera }))
     this.manager.addSystem(new RenderSystem({ manager: this.manager, game: this.game, camera: this.camera }))
   }
