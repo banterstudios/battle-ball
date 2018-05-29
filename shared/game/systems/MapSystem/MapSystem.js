@@ -1,4 +1,3 @@
-import isDev from 'isdev'
 import { mapToIsoCoord } from '../../helpers'
 
 const defaultMap = [
@@ -66,6 +65,11 @@ export default class MapSystem {
         this.manager.updateComponentDataForEntity('Position', floorTile, {
           x,
           y
+        })
+
+        this.manager.updateComponentDataForEntity('BoundingBox', floorTile, {
+          width: 100,
+          height: 65
         })
 
         this.tiles.push(floorTile)

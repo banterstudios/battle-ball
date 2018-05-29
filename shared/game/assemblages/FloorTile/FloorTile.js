@@ -4,7 +4,8 @@ export default {
   components: [
     'Moveable',
     'Position',
-    'Sprite'
+    'Sprite',
+    'BoundingBox'
   ],
   initialState: {}
 }

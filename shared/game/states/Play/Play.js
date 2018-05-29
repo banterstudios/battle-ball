@@ -1,5 +1,5 @@
 import { EntityManager } from '../../managers'
-import { Moveable, Sprite, Position } from '../../components'
+import { Moveable, Sprite, Position, BoundingBox } from '../../components'
 import { FloorTile, IsometricCamera } from '../../assemblages'
 import { RenderSystem, MapSystem } from '../../systems'
 
@@ -22,6 +22,7 @@ export default class Play {
     this.manager.addComponent(Moveable.name, Moveable)
     this.manager.addComponent(Sprite.name, Sprite)
     this.manager.addComponent(Position.name, Position)
+    this.manager.addComponent(BoundingBox.name, BoundingBox)
   }
 
   addAssemblages () {
