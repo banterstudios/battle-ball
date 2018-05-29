@@ -22,12 +22,12 @@ hr {
 
 img {
   max-width: 100%;
-  image-rendering: optimizeSpeed;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: optimize-contrast;
-  image-rendering: pixelated;
-  -ms-interpolation-mode: nearest-neighbor;
+  // image-rendering: optimizeSpeed;
+  // image-rendering: -moz-crisp-edges;
+  // image-rendering: -webkit-optimize-contrast;
+  // image-rendering: optimize-contrast;
+  // image-rendering: pixelated;
+  // -ms-interpolation-mode: nearest-neighbor;
 }
 
 ul {
@@ -36,6 +36,10 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+canvas {
+  display: block;
 }
 
 main {

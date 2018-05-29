@@ -1,4 +1,5 @@
 import isDev from 'isdev'
+import { mapToIsoCoord } from '../../../utils/mathUtils'
 
 const defaultMap = [
   [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
@@ -61,7 +62,12 @@ export default class MapSystem {
 
       const img = this.game.assetManager.getAsset(name)
 
-      this.game.ctx.drawImage(img, x * width, y * height)
+      const {
+        x: tileX,
+        y: tileY
+      } = mapToIsoCoord(x, y, width, height)
+
+      this.game.ctx.drawImage(img, tileX, tileY)
     })
   }
 

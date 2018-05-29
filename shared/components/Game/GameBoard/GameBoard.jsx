@@ -6,6 +6,10 @@ import {
   Play,
   Preload
 } from '../../../game/states'
+import {
+  GAME_WIDTH,
+  GAME_HEIGHT
+} from '../../../game/consts'
 
 @withScaledWrapper
 export default class GameBoard extends Component {
@@ -19,7 +23,9 @@ export default class GameBoard extends Component {
   componentDidMount () {
     this.game = new Game({
       canvas: this.gameRef.current,
-      init: this.initGame
+      init: this.initGame,
+      width: GAME_WIDTH,
+      height: GAME_HEIGHT
     })
   }
 
@@ -42,9 +48,12 @@ export default class GameBoard extends Component {
   render () {
     return (
       <canvas
-        width={1200}
-        height={600}
-        style={{ width: this.props.gameWidth, height: this.props.gameHeight }}
+        width={GAME_WIDTH}
+        height={GAME_HEIGHT}
+        style={{
+          width: this.props.gameWidth || GAME_WIDTH,
+          height: this.props.gameHeight || GAME_HEIGHT
+        }}
         ref={this.gameRef}
       />
     )

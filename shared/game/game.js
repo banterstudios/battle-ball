@@ -13,11 +13,18 @@ import {
 const noop = () => {}
 
 export default class Game {
-  constructor ({ canvas, init }) {
+  constructor ({ canvas, init, width, height }) {
     // Dom related st00f
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.reqAnimFrameId = null
+
+    // Images
+    this.antialias = true
+
+    // Game Dimensions
+    this.gameWidth = width
+    this.gameHeight = height
 
     // Callbacks
     this.initCallback = init || noop
@@ -32,9 +39,13 @@ export default class Game {
   }
 
   start () {
-    this.addImageOptimisation()
+    if (this.antialias) {
+      this.addImageOptimisation()
+    }
+
     this.createManagers()
     this.initCallback(this)
+    this.bindEvents()
     this.loop()
   }
 
@@ -53,12 +64,20 @@ export default class Game {
     this.stateManager = new GameStateManager(this)
   }
 
+  bindEvents () {
+    window.addEventListener('resize', this.handleResize, false)
+  }
+
+  handleResize = () => {
+    this.addImageOptimisation()
+  }
+
   update = (step) => {
     this.stateManager.update(step)
   }
 
   render = (delta) => {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctx.clearRect(0, 0, this.gameWidth, this.gameHeight)
 
     this.stateManager.render(delta)
   }
@@ -68,7 +87,12 @@ export default class Game {
     this.reqAnimFrameId = requestAnimationFrame(this.loop)
   }
 
+  unBindEvents () {
+    window.removeEventListener('resize', this.handleResize, false)
+  }
+
   stop () {
     cancelAnimationFrame(this.reqAnimFrameId)
+    this.unBindEvents()
   }
 }

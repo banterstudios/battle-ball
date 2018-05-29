@@ -40,7 +40,7 @@ export default {
       y: 200
     },
     'Portrait': {
-      sprite: 'portrait_imperator',
+      sprite: 'portrait_imperator'
     }
   }
 }
