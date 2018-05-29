@@ -6,11 +6,5 @@ export default {
     'Position',
     'Sprite'
   ],
-  initialState: {
-    Sprite: {
-      name: 'floorTile',
-      width: 90,
-      height: 45
-    }
-  }
+  initialState: {}
 }

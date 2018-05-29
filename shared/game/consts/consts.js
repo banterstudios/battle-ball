@@ -22,10 +22,10 @@ export const ASSET_TYPES = Object.freeze({
   AUDIO: 'audio'
 })
 
-export const GAME_WIDTH = 1200
+export const GAME_WIDTH = 2000
 
-export const GAME_HEIGHT = 600
+export const GAME_HEIGHT = 1000
 
-export const STATIC_TILE_WIDTH = 90
+export const STATIC_TILE_WIDTH = 100
 
-export const STATIC_TILE_HEIGHT = 45
+export const STATIC_TILE_HEIGHT = 50
