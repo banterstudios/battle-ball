@@ -16,7 +16,7 @@ export default class Game {
   constructor ({ canvas, init, width, height }) {
     // Dom related st00f
     this.canvas = canvas
-    this.ctx = canvas.getContext('2d')
+    this.ctx = canvas.getContext('2d', { alpha: false })
     this.reqAnimFrameId = null
 
     // Images

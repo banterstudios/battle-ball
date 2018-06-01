@@ -1,4 +1,4 @@
-export { 
+export {
   mapToIsoCoord,
   isoToMapCoord,
   isInView,
