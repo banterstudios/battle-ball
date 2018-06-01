@@ -2,7 +2,8 @@ import {
   EntityManager,
   TimeManager,
   AssetManager,
-  GameStateManager
+  GameStateManager,
+  InputManager
 } from './managers'
 
 import {
@@ -34,6 +35,7 @@ export default class Game {
     this.globalEntityManager = null
     this.assetManager = null
     this.stateManager = null
+    this.inputManager = null
 
     this.start()
   }
@@ -61,6 +63,7 @@ export default class Game {
     this.timeManager = new TimeManager()
     this.globalEntityManager = new EntityManager()
     this.assetManager = new AssetManager()
+    this.inputManager = new InputManager(this)
     this.stateManager = new GameStateManager(this)
   }
 

@@ -29,3 +29,7 @@ export const GAME_HEIGHT = 1000
 export const STATIC_TILE_WIDTH = 100
 
 export const STATIC_TILE_HEIGHT = 50
+
+export const GAME_INPUT = {
+
+}
