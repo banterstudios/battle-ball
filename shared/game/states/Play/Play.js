@@ -10,7 +10,7 @@ export default class Play {
   }
 
   init () {
-    this.manager = new EntityManager()
+    this.manager = window.eManager = new EntityManager()
 
     this.addComponents()
     this.addAssemblages()
