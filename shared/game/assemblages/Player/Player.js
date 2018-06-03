@@ -20,8 +20,8 @@ export default {
       y: 0
     },
     'Sprite': {
-      width: 40,
-      height: 60,
+      width: 100,
+      height: 65,
       name: 'player_blue'
     }
   }
