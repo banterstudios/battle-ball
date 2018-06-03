@@ -1,14 +1,33 @@
+import { mapToIsoCoord } from '../../helpers'
+import isDev from 'isdev'
+
 export default class RenderSystem {
-  constructor ({ manager, game }) {
+  constructor ({ manager, game, camera }) {
     this.manager = manager
     this.game = game
-  }
-
-  renderScene () {
+    this.camera = camera
   }
 
   update (delta) {
-    // draw tiles
-    this.renderScene()
+    const players = this.manager.getComponentsData('Player')
+    const { x: cameraX, y: cameraY } = this.manager.getComponentDataForEntity('Position', this.camera)
+
+    for (const playerId in players) {
+      const player = players[playerId].entityId
+      const { x, y } = this.manager.getComponentDataForEntity('Position', player)
+      const { width, name, height } = this.manager.getComponentDataForEntity('Sprite', player)
+
+      const { x: pX, y: pY } = mapToIsoCoord(x, y)
+
+      const { img } = this.game.assetManager.getAsset(name)
+
+      if (img) {
+        this.game.ctx.drawImage(img, pX + cameraX, pY + cameraY, width, height)
+      }
+
+      if (isDev) {
+        this.game.ctx.strokeRect(pX + cameraX, pY + cameraY, width, height)
+      }
+    }
   }
 }

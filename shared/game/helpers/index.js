@@ -2,5 +2,6 @@ export {
   mapToIsoCoord,
   isoToMapCoord,
   isInView,
-  setFullScreen
+  setFullScreen,
+  doRectsIntersect
 } from './helpers'

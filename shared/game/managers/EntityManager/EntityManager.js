@@ -12,7 +12,8 @@ export default class EntityManager {
     this.components = {}
     this.assemblages = {}
     this.entityComponentData = {}
-    this.systems = []
+    this.logicSystems = []
+    this.renderSystems = []
     this.uid = 0
   }
 
@@ -139,11 +140,7 @@ export default class EntityManager {
   }
 
   getComponentsData (componentId) {
-    if (!this.components[componentId]) {
-      throw new Error(`No data for component: ${componentId}`)
-    }
-
-    if (!this.entityComponentData.hasOwnProperty(componentId)) {
+    if (!this.components[componentId] || !this.entityComponentData.hasOwnProperty(componentId)) {
       return []
     }
 
@@ -194,16 +191,28 @@ export default class EntityManager {
   }
 
   // Systems
-  addSystem (system) {
-    this.systems.push(system)
+  addLogicSystem (system) {
+    this.logicSystems.push(system)
   }
 
-  removeSystem (systemToRemove) {
-    this.systems = this.systems.filter((system) => system !== systemToRemove)
+  addRenderSystem (system) {
+    this.renderSystems.push(system)
+  }
+
+  removeLogicSystem (systemToRemove) {
+    this.logicSystems = this.logicSystems.filter((system) => system !== systemToRemove)
+  }
+
+  removeRenderSystem (systemToRemove) {
+    this.renderSystems = this.renderSystems.filter((system) => system !== systemToRemove)
   }
 
   update (step) {
-    this.systems.forEach((system) => system.update(step))
+    this.logicSystems.forEach((system) => system.update(step))
+  }
+
+  render (delta) {
+    this.renderSystems.forEach((system) => system.update(delta))
   }
 
   destroy () {
@@ -211,7 +220,8 @@ export default class EntityManager {
     this.components = null
     this.assemblages = null
     this.entityComponentData = null
-    this.systems = null
+    this.renderSystems = null
+    this.logicSystems = null
     this.uid = null
   }
 }

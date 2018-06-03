@@ -38,12 +38,14 @@ export default class AssetManager {
 
     for (const asset of assets) {
       try {
-        const data = await loadAssetByType(asset)
+        this.assets.set(asset.name, { loading: true, img: null })
 
-        this.assets.set(asset.name, data)
+        const img = await loadAssetByType(asset)
+
+        this.assets.set(asset.name, { loading: false, img })
 
         if (progressUpdateCallback) {
-          progressUpdateCallback(data)
+          progressUpdateCallback(img)
         }
       } catch (e) {
         throw new Error(e)

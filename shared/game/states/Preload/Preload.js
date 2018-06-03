@@ -37,6 +37,10 @@ const assetsToPreload = [{
   type: ASSET_TYPES.IMAGE,
   name: 'beach_floor_w',
   src: '/static/assets/images/battleball/tiles/beachW.png'
+}, {
+  type: ASSET_TYPES.IMAGE,
+  name: 'player_blue',
+  src: '/static/assets/images/battleball/player/playerblue.png'
 }]
 
 export default class Preload {
@@ -56,8 +60,6 @@ export default class Preload {
     if (isDev) {
       console.log('Done preloading')
     }
-
-    this.game.stateManager.start('play')
   }
 
   createProgressBar () {
@@ -71,12 +73,21 @@ export default class Preload {
       y: (gameHeight / 2) - (height / 2),
       width,
       height,
+      currentWidth: 0,
       color: '#fff'
     }
   }
 
+  update () {
+    if (Math.round(this.progressBar.currentWidth) >= this.progressBar.width) {
+      this.game.stateManager.start('play')
+    }
+
+    this.progressBar.currentWidth += (this.progressBar.width / (this.totalAssets / this.totalAssetsLoaded) - this.progressBar.currentWidth) * 0.1
+  }
+
   render () {
-    const { x, y, width, height, color } = this.progressBar
+    const { x, y, currentWidth, height, color } = this.progressBar
 
     this.game.ctx.save()
 
@@ -86,7 +97,7 @@ export default class Preload {
 
     this.game.ctx.fillStyle = color
 
-    this.game.ctx.fillRect(x, y, width / (this.totalAssets / this.totalAssetsLoaded), height)
+    this.game.ctx.fillRect(x, y, currentWidth, height)
 
     this.game.ctx.restore()
   }

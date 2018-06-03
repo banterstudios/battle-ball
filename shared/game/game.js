@@ -94,8 +94,37 @@ export default class Game {
     window.removeEventListener('resize', this.handleResize, false)
   }
 
+  destroyManagers () {
+    if (this.timeManager.destroy) {
+      this.timeManager.destroy()
+    }
+
+    if (this.globalEntityManager.destroy) {
+      this.globalEntityManager.destroy()
+    }
+
+    if (this.assetManager.destroy) {
+      this.assetManager.destroy()
+    }
+
+    if (this.inputManager.destroy) {
+      this.inputManager.destroy()
+    }
+
+    if (this.stateManager.destroy) {
+      this.stateManager.destroy()
+    }
+
+    this.timeManager = null
+    this.globalEntityManager = null
+    this.assetManager = null
+    this.inputManager = null
+    this.stateManager = null
+  }
+
   stop () {
     cancelAnimationFrame(this.reqAnimFrameId)
     this.unBindEvents()
+    this.destroyManagers()
   }
 }

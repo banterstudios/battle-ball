@@ -1,34 +1,12 @@
 import { mapToIsoCoord } from '../../helpers'
 
-const defaultMap = [
-  [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-  [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-  [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-  [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-  [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0]
-]
-
 export default class MapSystem {
   constructor ({ manager, game, map, camera }) {
     this.manager = manager
     this.game = game
     this.camera = camera
-    this.map = map || defaultMap
     this.tiles = []
+    this.level = null
 
     this.init()
   }
@@ -38,15 +16,13 @@ export default class MapSystem {
   }
 
   createLevel () {
-    const { map } = this
+    this.level = this.manager.createEntityFromAssemblage('Level')
 
-    if (!map) {
-      throw new Error(`map is invalid: ${typeof map} - Expected an array`)
-    }
+    const { tiles } = this.manager.getComponentDataForEntity('TileMap', this.level)
 
-    for (let y = 0; y < map.length; y++) {
-      for (let x = 0; x < map[y].length; x++) {
-        const mapEntity = map[y][x]
+    for (let y = 0; y < tiles.length; y++) {
+      for (let x = 0; x < tiles[y].length; x++) {
+        const mapEntity = tiles[y][x]
 
         if (mapEntity === 0) {
           continue
@@ -67,11 +43,6 @@ export default class MapSystem {
           y
         })
 
-        this.manager.updateComponentDataForEntity('BoundingBox', floorTile, {
-          width: 100,
-          height: 65
-        })
-
         this.tiles.push(floorTile)
       }
     }
@@ -83,8 +54,7 @@ export default class MapSystem {
     this.tiles.forEach((tileId) => {
       const { width, name, height } = this.manager.getComponentDataForEntity('Sprite', tileId)
       const { x, y } = this.manager.getComponentDataForEntity('Position', tileId)
-
-      const img = this.game.assetManager.getAsset(name)
+      const { img } = this.game.assetManager.getAsset(name)
 
       const {
         x: tileX,
