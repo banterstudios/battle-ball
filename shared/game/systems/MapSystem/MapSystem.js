@@ -32,9 +32,9 @@ export default class MapSystem {
 
         if (mapEntity === 1) {
           this.manager.updateComponentDataForEntity('Sprite', floorTile, {
-            name: 'beach_floor',
-            width: 100,
-            height: 65
+            name: 'tile_thin',
+            width: 128,
+            height: 72
           })
         }
 

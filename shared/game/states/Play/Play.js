@@ -63,7 +63,7 @@ export default class Play {
 
     this.manager.updateComponentDataForEntity('Position', this.camera, {
       x: this.game.gameWidth / 2,
-      y: 25
+      y: -64
     })
   }
 
