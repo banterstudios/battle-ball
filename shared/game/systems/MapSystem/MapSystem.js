@@ -34,9 +34,7 @@ export default class MapSystem {
           this.manager.updateComponentDataForEntity('Sprite', floorTile, {
             name: 'beach_floor',
             width: 100,
-            height: 65,
-            offsetX: 0,
-            offsetY: 15
+            height: 65
           })
         }
 
@@ -54,7 +52,7 @@ export default class MapSystem {
     const { x: cameraX, y: cameraY } = this.manager.getComponentDataForEntity('Position', this.camera)
 
     this.tiles.forEach((tileId) => {
-      const { width, name, height, offsetX, offsetY } = this.manager.getComponentDataForEntity('Sprite', tileId)
+      const { width, name, height } = this.manager.getComponentDataForEntity('Sprite', tileId)
       const { x, y } = this.manager.getComponentDataForEntity('Position', tileId)
       const { img } = this.game.assetManager.getAsset(name)
 
@@ -64,7 +62,7 @@ export default class MapSystem {
       } = mapToIsoCoord(x, y)
 
       if (img) {
-        this.game.ctx.drawImage(img, (tileX + cameraX) - offsetX, (tileY + cameraY) - offsetY, width, height)
+        this.game.ctx.drawImage(img, tileX + cameraX, tileY + cameraY, width, height)
       }
     })
   }
