@@ -53,7 +53,7 @@ export default class MapSystem {
 
     this.tiles.forEach((tileId) => {
       const { width, name, height } = this.manager.getComponentDataForEntity('Sprite', tileId)
-      const { x, y } = this.manager.getComponentDataForEntity('Position', tileId)
+      const { x, y, z } = this.manager.getComponentDataForEntity('Position', tileId)
       const { img } = this.game.assetManager.getAsset(name)
 
       const {
@@ -62,7 +62,7 @@ export default class MapSystem {
       } = mapToIsoCoord(x, y)
 
       if (img) {
-        this.game.ctx.drawImage(img, tileX + cameraX, tileY + cameraY, width, height)
+        this.game.ctx.drawImage(img, tileX + cameraX, (tileY - z) + cameraY, width, height)
       }
     })
   }

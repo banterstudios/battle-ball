@@ -10,6 +10,11 @@ export default {
     Input: {
       clickable: true,
       hoverable: true
+    },
+    Position: {
+      x: 0,
+      y: 0,
+      z: 0
     }
   }
 }
