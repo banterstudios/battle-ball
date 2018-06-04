@@ -11,6 +11,10 @@ const assetsToPreload = [{
   src: '/static/assets/images/battleball/tiles/tile-thin.png'
 }, {
   type: ASSET_TYPES.IMAGE,
+  name: 'tile_highlight',
+  src: '/static/assets/images/battleball/tiles/tile-highlight.png'
+}, {
+  type: ASSET_TYPES.IMAGE,
   name: 'player_blue',
   src: '/static/assets/images/battleball/player/playerblue.png'
 }]

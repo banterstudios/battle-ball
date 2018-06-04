@@ -1,5 +1,7 @@
 import { EntityManager } from '../../managers'
 
+import { STATIC_TILE_HEIGHT } from '../../consts'
+
 import {
   Moveable,
   Sprite,
@@ -63,7 +65,7 @@ export default class Play {
 
     this.manager.updateComponentDataForEntity('Position', this.camera, {
       x: this.game.gameWidth / 2,
-      y: -64
+      y: -(STATIC_TILE_HEIGHT / 2)
     })
   }
 
