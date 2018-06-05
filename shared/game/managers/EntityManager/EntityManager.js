@@ -215,13 +215,22 @@ export default class EntityManager {
     this.renderSystems.forEach((system) => system.update(delta))
   }
 
+  destroySystem (systems) {
+    systems.forEach((system) => system.destroy && system.destroy())
+  }
+
   destroy () {
     this.entities = null
     this.components = null
     this.assemblages = null
     this.entityComponentData = null
+
+    this.destroySystem(this.renderSystems)
     this.renderSystems = null
+
+    this.destroySystem(this.logicSystems)
     this.logicSystems = null
+
     this.uid = null
   }
 }

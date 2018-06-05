@@ -222,16 +222,17 @@ describe('@EntityManager', () => {
       })
 
       describe('And there is an invalid entity', () => {
-        it('throws an error', () => {
+        it('creates a new obj inside entityComponentData', () => {
           entityManager.components = createFakeComponent({
             name: 'nick'
           })
 
-          const throwedFn = entityManager.addComponentsToEntity.bind(entityManager, ['nick'], 0)
+          entityManager.addComponentsToEntity(['nick'], 0)
 
-          expect(
-            throwedFn
-          ).toThrowError('Trying to use unknown entity: 0')
+          expect(entityManager.entityComponentData['nick'][0]).toMatchObject({
+            test: 'nick',
+            entityId: 0
+          })
         })
       })
 
