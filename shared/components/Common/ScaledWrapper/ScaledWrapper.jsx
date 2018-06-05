@@ -29,8 +29,7 @@ const generateStyleProps = ({
     width: gameWidth,
     height: gameHeight,
     transform: `scale3d(${scaledWidth}, ${scaledHeight}, 1)`,
-    transformOrigin: width < gameWidthNoUnit ? 'top left' : 'center',
-    background: `url('/static/assets/images/menu/background.png') center / cover no-repeat`
+    transformOrigin: width < gameWidthNoUnit ? 'top left' : 'center'
   }
 }
 

@@ -22,7 +22,7 @@ export default (req, res) => {
   ))
 
   const templateData = {
-    title: 'Gangsta Claus',
+    title: 'Battle Ball',
     initialHtml: html,
     initialCSS: css,
     initialIds: serializeJS(ids),

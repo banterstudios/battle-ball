@@ -5,8 +5,7 @@ const BREAK_POINTS = require('./breakpoints')
 
 module.exports = {
   // Fonts
-  fontPrimary: `${TYPOG.raleway}, ${TYPOG.sansSerif}`,
-  fontSecondary: `${TYPOG.openSans}, ${TYPOG.helvetica}`,
+  fontPrimary: `${TYPOG.helvetica}, ${TYPOG.sansSerif}`,
 
   // Modal
   priorityModalZIndex: 9999,

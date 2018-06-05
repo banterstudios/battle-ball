@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import glamorous from 'glamorous'
-// import { Intro } from '../../components/Menu'
 import GameBoard from '../../components/Game'
 
 const StyledView = glamorous.div({
@@ -10,14 +9,13 @@ const StyledView = glamorous.div({
 })
 
 export default class GameView extends Component {
-  state = { active: false, showLoader: true, isClient: false, isLoading: true }
+  state = { isClient: false }
+
   componentDidMount () {
     this.setState({ isClient: true })
-    // setTimeout(() => this.setState({ active: true }), 3000)
   }
-  render () {
-    // const { showLoader, active, isClient, isLoading } = this.state
 
+  render () {
     if (!this.state.isClient) {
       return null
     }
@@ -27,24 +25,5 @@ export default class GameView extends Component {
         <GameBoard />
       </StyledView>
     )
-
-    // return (
-    //   <StyledView>
-    //     {
-    //       (showLoader) && (
-    //         <Intro
-    //           active={active}
-    //           isLoading={isLoading}
-    //           onEnd={() => { active ? this.setState({ isLoading: false }) : null } }
-    //         />
-    //       )
-    //     }
-    //     {
-    //       (!isLoading) && (
-    //         <GameBoard />
-    //       )
-    //     }
-    //   </StyledView>
-    // )
   }
 }

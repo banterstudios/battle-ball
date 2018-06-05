@@ -12,16 +12,16 @@ export default {
     'BoundingBox': {
       x: 0,
       y: 0,
-      width: 100,
-      height: 65
+      width: 128,
+      height: 128
     },
     'Position': {
-      x: 0,
+      x: 2,
       y: 0
     },
     'Sprite': {
-      width: 100,
-      height: 65,
+      width: 128,
+      height: 128,
       name: 'player_blue'
     }
   }
