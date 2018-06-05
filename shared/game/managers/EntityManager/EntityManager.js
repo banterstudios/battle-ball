@@ -6,6 +6,9 @@ import {
 
 const blackListedProps = ['entityId']
 
+/**
+ * @todo Clean up the code...
+ */
 export default class EntityManager {
   constructor () {
     this.entities = []
