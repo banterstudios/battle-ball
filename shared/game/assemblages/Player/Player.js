@@ -16,8 +16,9 @@ export default {
       height: 128
     },
     'Position': {
-      x: 2,
-      y: 0
+      x: 8,
+      y: 8,
+      z: 64
     },
     'Sprite': {
       width: 128,

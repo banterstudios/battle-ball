@@ -14,12 +14,14 @@ export default class InputManager {
   }
 
   init () {
-    window.addEventListener('mousedown', this.handleMouse, false)
-    window.addEventListener('mousemove', this.handleMouse, false)
-    window.addEventListener('mouseup', this.handleMouse, false)
+    this.game.canvas.addEventListener('mousedown', this.handleMouse, false)
+    this.game.canvas.addEventListener('mousemove', this.handleMouse, false)
+    this.game.canvas.addEventListener('mouseup', this.handleMouse, false)
   }
 
-  handleMouse = ({ type, pageX, pageY }) => {
+  handleMouse = ({ type, clientX, clientY }) => {
+    const { canvas: { offsetLeft, offsetTop } } = this.game
+
     switch (type) {
       case 'mouseup':
         this.mouse.isDown = false
@@ -33,13 +35,13 @@ export default class InputManager {
         break
     }
 
-    this.mouse.x = pageX
-    this.mouse.y = pageY
+    this.mouse.x = (clientX - offsetLeft) >> 0
+    this.mouse.y = (clientY - offsetTop) >> 0
   }
 
   destroy () {
-    window.removeEventListener('mousedown', this.handleMouse, false)
-    window.removeEventListener('mousemove', this.handleMouse, false)
-    window.removeEventListener('mouseup', this.handleMouse, false)
+    this.game.canvas.removeEventListener('mousedown', this.handleMouse, false)
+    this.game.canvas.removeEventListener('mousemove', this.handleMouse, false)
+    this.game.canvas.removeEventListener('mouseup', this.handleMouse, false)
   }
 }

@@ -14,7 +14,7 @@ export default class RenderSystem {
 
     for (const playerId in players) {
       const player = players[playerId].entityId
-      const { x, y } = this.manager.getComponentDataForEntity('Position', player)
+      const { x, y, z } = this.manager.getComponentDataForEntity('Position', player)
       const { width, name, height } = this.manager.getComponentDataForEntity('Sprite', player)
 
       const { x: pX, y: pY } = mapToIsoCoord(x, y)
@@ -22,11 +22,11 @@ export default class RenderSystem {
       const { img } = this.game.assetManager.getAsset(name)
 
       if (img) {
-        this.game.ctx.drawImage(img, pX + cameraX, pY + cameraY, width, height)
+        this.game.ctx.drawImage(img, pX + cameraX, (pY - z) + cameraY, width, height)
       }
 
       if (isDev) {
-        this.game.ctx.strokeRect(pX + cameraX, pY + cameraY, width, height)
+        this.game.ctx.strokeRect(pX + cameraX, (pY - z) + cameraY, width, height)
       }
     }
   }
