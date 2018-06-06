@@ -30,24 +30,37 @@ export default class MapSystem {
 
         const floorTile = this.manager.createEntityFromAssemblage('FloorTile')
 
+        let z = 0
+        let height = 0
+
         if (mapEntity === 1) {
           this.manager.updateComponentDataForEntity('Sprite', floorTile, {
             name: 'tile_thin',
             width: 128,
             height: 72
           })
+          z = 8
+          height = 72
         } else if (mapEntity === 2) {
           this.manager.updateComponentDataForEntity('Sprite', floorTile, {
             name: 'tile_flat',
             width: 128,
             height: 64
           })
+          height = 64
         }
+
+        this.manager.updateComponentDataForEntity('BoundingBox', floorTile, {
+          x,
+          y,
+          width: 128,
+          height
+        })
 
         this.manager.updateComponentDataForEntity('Position', floorTile, {
           x,
           y,
-          z: mapEntity === 1 ? 8 : 0
+          z
         })
 
         this.tiles.push(floorTile)

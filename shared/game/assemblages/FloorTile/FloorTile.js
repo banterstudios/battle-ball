@@ -5,7 +5,8 @@ export default {
     'Position',
     'Sprite',
     'Input',
-    'Collidable'
+    'Collidable',
+    'BoundingBox'
   ],
   initialState: {
     Input: {
