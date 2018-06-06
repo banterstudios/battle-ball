@@ -36,11 +36,18 @@ export default class MapSystem {
             width: 128,
             height: 72
           })
+        } else if (mapEntity === 2) {
+          this.manager.updateComponentDataForEntity('Sprite', floorTile, {
+            name: 'tile_flat',
+            width: 128,
+            height: 64
+          })
         }
 
         this.manager.updateComponentDataForEntity('Position', floorTile, {
           x,
-          y
+          y,
+          z: mapEntity === 1 ? 8 : 0
         })
 
         this.tiles.push(floorTile)
