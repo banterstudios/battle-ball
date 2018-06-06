@@ -1,10 +1,15 @@
 import { FRAME_DIVIDER, STEP } from '../../consts'
+import Stats from 'stats.js'
 
 export default class TimeManager {
   constructor () {
     this.now = 0
     this.delta = 0
     this.last = 0
+
+    this.stats = new Stats()
+    this.stats.showPanel(0)
+    document.body.appendChild(this.stats.dom)
   }
 
   reset () {
@@ -14,6 +19,8 @@ export default class TimeManager {
   }
 
   run (gameUpdate, gameRender) {
+    this.stats.begin()
+
     this.now = window.performance.now()
     this.delta = this.delta + Math.min(1, (this.now - this.last) / FRAME_DIVIDER)
 
@@ -25,5 +32,7 @@ export default class TimeManager {
     gameRender(this.delta)
 
     this.last = this.now
+
+    this.stats.end()
   }
 }
