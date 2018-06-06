@@ -4,7 +4,8 @@ export default {
   components: [
     'Position',
     'Sprite',
-    'Input'
+    'Input',
+    'Collidable'
   ],
   initialState: {
     Input: {

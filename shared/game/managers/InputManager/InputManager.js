@@ -20,7 +20,9 @@ export default class InputManager {
   }
 
   handleMouse = ({ type, clientX, clientY }) => {
-    const { canvas: { offsetLeft, offsetTop } } = this.game
+    const { left, top, width, height } = this.game.canvas.getBoundingClientRect()
+    const scaleX = this.game.canvas.width / width
+    const scaleY = this.game.canvas.height / height
 
     switch (type) {
       case 'mouseup':
@@ -35,8 +37,8 @@ export default class InputManager {
         break
     }
 
-    this.mouse.x = (clientX - offsetLeft) >> 0
-    this.mouse.y = (clientY - offsetTop) >> 0
+    this.mouse.x = ((clientX - left) * scaleX) >> 0
+    this.mouse.y = ((clientY - top) * scaleY) >> 0
   }
 
   destroy () {

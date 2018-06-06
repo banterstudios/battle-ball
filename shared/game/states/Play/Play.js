@@ -74,7 +74,7 @@ export default class Play {
   }
 
   addSystems () {
-    this.manager.addLogicSystem(new CollisionSystem({ manager: this.manager, game: this.game }))
+    this.manager.addLogicSystem(new CollisionSystem({ manager: this.manager, game: this.game, camera: this.camera }))
     this.manager.addRenderSystem(new MapSystem({ manager: this.manager, game: this.game, camera: this.camera }))
     this.manager.addRenderSystem(new RenderSystem({ manager: this.manager, game: this.game, camera: this.camera }))
   }

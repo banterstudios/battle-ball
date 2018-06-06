@@ -45,8 +45,8 @@ export default class TimeManager {
 
   destroy () {
     if (isDev) {
-      this.stats = null
       document.body.removeChild(this.stats.dom)
+      this.stats = null
     }
   }
 }

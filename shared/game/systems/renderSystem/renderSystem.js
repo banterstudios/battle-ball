@@ -8,7 +8,7 @@ export default class RenderSystem {
     this.camera = camera
   }
 
-  update (delta) {
+  renderPlayer (delta) {
     const players = this.manager.getComponentsData('Player')
     const { x: cameraX, y: cameraY } = this.manager.getComponentDataForEntity('Position', this.camera)
 
@@ -29,5 +29,17 @@ export default class RenderSystem {
         this.game.ctx.strokeRect(pX + cameraX, (pY - z) + cameraY, width, height)
       }
     }
+  }
+
+  renderMouse () {
+    const { x, y, width, height } = this.game.inputManager.mouse
+    this.game.ctx.strokeStyle = '#ff0000'
+    this.game.ctx.strokeRect(x - (width / 2), y - (height / 2), width, height)
+    this.game.ctx.strokeStyle = '#000000'
+  }
+
+  update (delta) {
+    this.renderPlayer(delta)
+    this.renderMouse(delta)
   }
 }
