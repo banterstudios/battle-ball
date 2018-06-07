@@ -7,5 +7,6 @@ export {
 } from './helpers'
 
 export {
-  AStar
+  aStar,
+  Graph
 } from './AStar'

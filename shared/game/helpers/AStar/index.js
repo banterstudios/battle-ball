@@ -1,1 +1,1 @@
-export { default } from './AStar'
+export { default, Graph } from './AStar'

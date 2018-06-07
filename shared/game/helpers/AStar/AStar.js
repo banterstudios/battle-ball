@@ -9,19 +9,6 @@
 
 /* eslint-disable */
 
-(function(definition) {
-  /* global module, define */
-  if (typeof module === 'object' && typeof module.exports === 'object') {
-    module.exports = definition();
-  } else if (typeof define === 'function' && define.amd) {
-    define([], definition);
-  } else {
-    var exports = definition();
-    window.astar = exports.astar;
-    window.Graph = exports.Graph;
-  }
-})(function() {
-
 function pathTo(node) {
   var curr = node;
   var path = [];
@@ -159,7 +146,7 @@ var astar = {
  * @param {Object} [options]
  * @param {bool} [options.diagonal] Specifies whether diagonal moves are allowed
  */
-function Graph(gridIn, options) {
+export function Graph(gridIn, options) {
   options = options || {};
   this.nodes = [];
   this.diagonal = !!options.diagonal;
@@ -259,7 +246,7 @@ Graph.prototype.toString = function() {
   return graphString.join("\n");
 };
 
-function GridNode(x, y, weight) {
+export function GridNode(x, y, weight) {
   this.x = x;
   this.y = y;
   this.weight = weight;
@@ -281,7 +268,7 @@ GridNode.prototype.isWall = function() {
   return this.weight === 0;
 };
 
-function BinaryHeap(scoreFunction) {
+export function BinaryHeap(scoreFunction) {
   this.content = [];
   this.scoreFunction = scoreFunction;
 }
@@ -399,11 +386,6 @@ BinaryHeap.prototype = {
       }
     }
   }
-};
+}
 
-return {
-  astar: astar,
-  Graph: Graph
-};
-
-});
+export default astar
