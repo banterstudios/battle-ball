@@ -14,8 +14,8 @@ export default class CollisionSystem {
 
     for (const collidableId in collidables) {
       const collidable = collidables[collidableId].entityId
-      const { x, y, z } = this.manager.getComponentDataForEntity('Position', collidable)
-      const mousePos = isoToMapCoord(mouseX - cameraX, (mouseY + z) - cameraY)
+      const { x, y } = this.manager.getComponentDataForEntity('Position', collidable)
+      const mousePos = isoToMapCoord(mouseX - cameraX, mouseY - cameraY)
       let collidableData = this.manager.getComponentDataForEntity('Collidable', collidable)
 
       if (Math.round(mousePos.x) - 1 === x && Math.round(mousePos.y) === y) {
