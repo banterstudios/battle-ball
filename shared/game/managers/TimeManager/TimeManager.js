@@ -10,7 +10,7 @@ export default class TimeManager {
     if (isDev) {
       const Stats = require('stats.js')
       this.stats = new Stats()
-      this.stats.showPanel(1)
+      this.stats.showPanel(0)
       document.body.appendChild(this.stats.dom)
     }
   }
