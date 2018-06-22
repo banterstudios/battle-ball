@@ -1,3 +1,5 @@
+import { path as objPath } from '../../../utils/objectUtils'
+
 //  var graph = new Graph([
 //  [1,1,1,1],
 //  [0,1,1,0],
@@ -244,6 +246,14 @@ Graph.prototype.toString = function() {
     graphString.push(rowDebug.join(" "));
   }
   return graphString.join("\n");
+};
+
+Graph.prototype.at = function(x, y) {
+  if (this.grid[x] && this.grid[x][y]) {
+    return this.grid[x][y]
+  }
+
+  return []
 };
 
 export function GridNode(x, y, weight) {

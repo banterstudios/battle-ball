@@ -5,8 +5,3 @@ export {
   setFullScreen,
   doRectsIntersect
 } from './helpers'
-
-export {
-  aStar,
-  Graph
-} from './AStar'

@@ -7,7 +7,6 @@ import {
   Sprite,
   Position,
   BoundingBox,
-  Input,
   Collidable,
   TileMap,
   Player
@@ -23,7 +22,8 @@ import {
 import {
   RenderSystem,
   MapSystem,
-  CollisionSystem
+  CollisionSystem,
+  PlayerFollowSystem
 } from '../../systems'
 
 export default class Play {
@@ -49,7 +49,6 @@ export default class Play {
     this.manager.addComponent(Sprite.name, Sprite)
     this.manager.addComponent(Position.name, Position)
     this.manager.addComponent(BoundingBox.name, BoundingBox)
-    this.manager.addComponent(Input.name, Input)
     this.manager.addComponent(TileMap.name, TileMap)
   }
 
@@ -75,6 +74,7 @@ export default class Play {
 
   addSystems () {
     this.manager.addLogicSystem(new CollisionSystem({ manager: this.manager, game: this.game, camera: this.camera }))
+    this.manager.addLogicSystem(new PlayerFollowSystem({ manager: this.manager, game: this.game, camera: this.camera }))
     this.manager.addRenderSystem(new MapSystem({ manager: this.manager, game: this.game, camera: this.camera }))
     this.manager.addRenderSystem(new RenderSystem({ manager: this.manager, game: this.game, camera: this.camera }))
   }

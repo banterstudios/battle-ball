@@ -3,16 +3,9 @@ export default {
   description: 'Floor tile for battleball',
   components: [
     'Position',
-    'Sprite',
-    'Input',
-    'Collidable',
-    'BoundingBox'
+    'Sprite'
   ],
   initialState: {
-    Input: {
-      clickable: true,
-      hoverable: true
-    },
     Position: {
       x: 0,
       y: 0,
