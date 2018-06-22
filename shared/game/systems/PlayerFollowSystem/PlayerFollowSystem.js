@@ -29,7 +29,7 @@ export default class PlayerFollowSystem {
       const { x: cameraX, y: cameraY } = this.manager.getComponentDataForEntity('Position', this.camera)
       const { x: isoMouseX, y: isoMouseY } = isoToMapCoord(mouseX - cameraX, mouseY - cameraY)
 
-      const start = this.graph.at(x, y)
+      const start = this.graph.at(Math.round(x), Math.round(y))
       const end = this.graph.at((Math.round(isoMouseX) - 1), Math.round(isoMouseY))
 
       this.targetPositions = aStar.search(this.graph, start, end)
@@ -51,12 +51,6 @@ export default class PlayerFollowSystem {
 
   updatePlayer (delta) {
     const players = this.manager.getComponentsData('Player')
-
-    // Get the level
-    // Plug it into AStar
-    // Get the mouse coords
-    // work out where to walk too
-    // Use the camera / iso-map helpers to workout position.
 
     for (const playerId in players) {
       const player = players[playerId].entityId
