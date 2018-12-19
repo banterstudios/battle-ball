@@ -23,7 +23,8 @@ import {
   RenderSystem,
   MapSystem,
   CollisionSystem,
-  PlayerFollowSystem
+  PlayerFollowSystem,
+  PhysicsSystem
 } from '../../systems'
 
 export default class Play {
@@ -73,6 +74,7 @@ export default class Play {
   }
 
   addSystems () {
+    this.manager.addLogicSystem(new PhysicsSystem({ manager: this.manager, game: this.game, camera: this.camera }))
     this.manager.addLogicSystem(new CollisionSystem({ manager: this.manager, game: this.game, camera: this.camera }))
     this.manager.addLogicSystem(new PlayerFollowSystem({ manager: this.manager, game: this.game, camera: this.camera }))
     this.manager.addRenderSystem(new MapSystem({ manager: this.manager, game: this.game, camera: this.camera }))

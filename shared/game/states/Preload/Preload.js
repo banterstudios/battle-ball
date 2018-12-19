@@ -24,6 +24,7 @@ export default class Preload {
     this.game = game
     this.totalAssets = assetsToPreload.length
     this.totalAssetsLoaded = 0
+    this.speed = 0.1
   }
 
   async init () {
@@ -59,7 +60,7 @@ export default class Preload {
       this.game.stateManager.start('play')
     }
 
-    this.progressBar.currentWidth += (this.progressBar.width / (this.totalAssets / this.totalAssetsLoaded) - this.progressBar.currentWidth) * 0.1
+    this.progressBar.currentWidth += (this.progressBar.width / (this.totalAssets / this.totalAssetsLoaded) - this.progressBar.currentWidth) * this.speed
   }
 
   render () {

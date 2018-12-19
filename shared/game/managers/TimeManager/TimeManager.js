@@ -1,5 +1,5 @@
-import { FRAME_DIVIDER, STEP } from '../../consts'
 import isDev from 'isdev'
+import { FRAME_DIVIDER, STEP, MAX_ALLOWED_UPDATES_PER_STEP } from '../../consts'
 
 export default class TimeManager {
   constructor () {
@@ -21,22 +21,32 @@ export default class TimeManager {
     this.delta = 0
   }
 
+  panicAndBreakOutOfUpdate () {
+    this.delta = 0
+  }
+
   run (gameUpdate, gameRender) {
     if (isDev) {
       this.stats.begin()
     }
 
     this.now = window.performance.now()
-    this.delta = this.delta + Math.min(1, (this.now - this.last) / FRAME_DIVIDER)
+    this.delta += this.now - this.last
+    this.last = this.now
 
-    while (this.delta > STEP) {
-      this.delta = this.delta - STEP
+    let numberOfUpdatesPerStep = 0
+
+    while (this.delta >= STEP) {
       gameUpdate(STEP)
+      this.delta -= STEP
+
+      if (++numberOfUpdatesPerStep >= MAX_ALLOWED_UPDATES_PER_STEP) {
+        this.panicAndBreakOutOfUpdate()
+        break
+      }
     }
 
-    gameRender(this.delta)
-
-    this.last = this.now
+    gameRender(this.delta / STEP)
 
     if (isDev) {
       this.stats.end()

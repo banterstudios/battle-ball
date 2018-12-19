@@ -17,6 +17,12 @@ export default class InputManager {
     this.game.canvas.addEventListener('mousedown', this.handleMouse, false)
     this.game.canvas.addEventListener('mousemove', this.handleMouse, false)
     this.game.canvas.addEventListener('mouseup', this.handleMouse, false)
+
+    /**
+     * @todo Add in a condition to see if its mobile or not
+     */
+    this.game.canvas.addEventListener('touchstart', this.handleMouse, false)
+    this.game.canvas.addEventListener('touchend', this.handleMouse, false)
   }
 
   handleMouse = ({ type, clientX, clientY }) => {
@@ -26,9 +32,11 @@ export default class InputManager {
 
     switch (type) {
       case 'mouseup':
+      case 'touchend':
         this.mouse.isDown = false
         break
 
+      case 'touchstart':
       case 'mousedown':
         this.mouse.isDown = true
         break

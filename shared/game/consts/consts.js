@@ -9,9 +9,11 @@ export const GAME_STATES = Object.freeze({
 
 export const FPS = 60
 
-export const STEP = 1 / FPS
-
 export const FRAME_DIVIDER = 1000
+
+export const STEP = FRAME_DIVIDER / FPS
+
+export const MAX_ALLOWED_UPDATES_PER_STEP = 250
 
 export const PUB_SUB = Object.freeze({
   UPDATE_STATE: 0
