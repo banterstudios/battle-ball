@@ -1,5 +1,15 @@
 {
   "compilerOptions": {
-      "experimentalDecorators": true
-  }
+      "experimentalDecorators": true,
+      "baseUrl": ".",
+      "paths": {
+        "shared/": ["shared/*"],
+        "server/*": ["server/*"]
+      }
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "build-server"
+  ]
 }

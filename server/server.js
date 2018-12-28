@@ -6,6 +6,8 @@ import path from 'path'
 import morgan from 'morgan'
 import exphbs from 'express-handlebars'
 import isDev from 'isdev'
+import expressStaticGzip from 'express-static-gzip'
+import httpResponses from './middleware/httpResponses'
 import { errorMessage } from './utils/messages'
 
 const port = process.env.PORT || 3100
@@ -17,44 +19,44 @@ if (isDev) {
 
 const handlebarsConfig = {
   defaultLayout: 'index',
-  layoutsDir: path.join(__dirname, '../build/views')
+  layoutsDir: path.resolve(__dirname, '../build/views')
 }
 
 app.engine('handlebars',
   exphbs(handlebarsConfig)
 )
 
+app.disable('x-powered-by')
+
 app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // view engine setup
-app.set('views', path.join(__dirname, '../build/views'))
+app.set('views', path.resolve(__dirname, '../build/views'))
 
 app.set('view engine', 'handlebars')
 
 app.use(morgan('dev'))
 
-app.use('/static', express.static('build'))
+app.use(express.static('public'))
+app.use('/js', expressStaticGzip('build/js'))
+app.use('/css', expressStaticGzip('build/css'))
 
-app.use((req, res, next) => {
-  require('./routes').default(req, res, next)
-})
+app.use(httpResponses())
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  var err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
+app.use(
+  isDev
+    ? (req, res, next) => require('./router').default(req, res, next)
+    : require('./router').default
+)
 
-// Error handling
+// Error handler
 app.use((err, req, res, next) => {
-  res.status(err.status || 500)
-  res.json(errorMessage({
-    message: err,
-    error: isDev ? err : {}
-  }))
+  res.httpResponse.badImplementation({
+    error: isDev ? err.stack : undefined,
+    message: err.message
+  })
 })
 
 app.listen(port, () => {

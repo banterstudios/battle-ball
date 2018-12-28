@@ -1,19 +1,29 @@
 {
   "presets": [
-    ["es2015", {
-      "es2015": {
-        "loose": true,
-        "modules": false
-      }
-    }], "react"
+    "@babel/preset-env",
+    "@babel/preset-react"
   ],
   "plugins": [
-    "transform-es2015-destructuring",
-    "transform-object-rest-spread",
-    "transform-runtime",
-    "transform-async-to-generator",
-    "transform-regenerator",
-    "transform-decorators-legacy",
-    "transform-class-properties"
+    "@babel/plugin-transform-destructuring",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-transform-regenerator",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    "@babel/plugin-proposal-class-properties",
+    ["babel-plugin-styled-components", {
+      "ssr": true
+    }],
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "shared": "./shared",
+        "server": "./server"
+      },
+      "transformFunctions": [
+        "module.hot.accept"
+      ]
+    }],
+    "react-hot-loader/babel"
   ]
 }
