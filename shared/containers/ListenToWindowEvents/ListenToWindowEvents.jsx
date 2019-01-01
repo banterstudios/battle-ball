@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { globalWindowResize, listenToWindowEvent } from '../../modules/listenToWindowEvents'
+import { globalWindowResize, listenToWindowEvent } from 'shared/redux/modules/listenToWindowEvents'
 
 const mapStateToProps = ({ windowEventData }) => ({
   ...windowEventData

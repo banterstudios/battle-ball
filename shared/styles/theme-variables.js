@@ -1,9 +1,9 @@
-const COLORS = require('./colors')
-const TYPOG = require('./typography')
-const MEDIA_QUERIES = require('./mediaQueries')
-const BREAK_POINTS = require('./breakpoints')
+import * as COLORS from './colors'
+import * as TYPOG from './typography'
+import * as MEDIA_QUERIES from './mediaQueries'
+import * as BREAK_POINTS from './breakpoints'
 
-module.exports = {
+export default {
   // Fonts
   fontPrimary: `${TYPOG.helvetica}, ${TYPOG.sansSerif}`,
 

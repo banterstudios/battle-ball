@@ -1,23 +1,27 @@
 import * as types from './types'
 
-export const fetchJokeFeed = () => ({
-  type: types.FETCH_JOKE_FEED,
-  payload: {}
-})
-
-export const fetchedJokeFeed = ({ feed, currentCount, limit, hasMorePosts }) => ({
-  type: types.ADD_JOKE_FEED,
-  payload: {
-    feed,
-    currentCount,
-    limit,
-    hasMorePosts
+// Action Creators
+export const globalWindowResize = ({ target: { innerWidth, innerHeight } }) => ({
+  type: types.GLOBAL_WINDOW_RESIZE,
+  data: {
+    width: innerWidth,
+    height: innerHeight
   }
 })
 
-export const failedToFetchJokeFeed = (error) => ({
-  type: types.FAILED_TO_FETCH_JOKE_FEED,
-  payload: {
-    error
-  }
+export const listenToWindowEvent = ({ name, mapEventToAction, filter = (e) => true }) => ({
+  type: 'FAKEFAKE'
 })
+
+// export const listenToWindowEvent = ({ name, mapEventToAction, filter = (e) => true }) => (dispatch) => {
+//   const handleEvent = (e) => {
+//     if (filter(e)) {
+//       dispatch(mapEventToAction(e))
+//     }
+//   }
+
+//   window.addEventListener(name, handleEvent)
+//   window.dispatchEvent(new Event(name))
+
+//   return () => window.removeEventListener(name, handleEvent)
+// }

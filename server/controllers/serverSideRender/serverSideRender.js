@@ -6,7 +6,7 @@ import { StaticRouter, matchPath } from 'react-router'
 import { ServerStyleSheet } from 'styled-components'
 import { configureStore } from 'shared/redux/store'
 import App from 'shared/components/App'
-import routes from '../../../shared/config/routes'
+import routes from 'shared/config/routes'
 
 const getRouteMatches = (store, url) => (
   routes.reduce((matches, route) => {

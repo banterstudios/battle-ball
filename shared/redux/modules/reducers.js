@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import jokeFeed from './jokeFeed'
+import windowEventData from './listenToWindowEvents'
 
 export default combineReducers({
-  jokeFeed
+  windowEventData
 })

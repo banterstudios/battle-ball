@@ -3,10 +3,10 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-const rootPath = path.resolve(__dirname, '../../')
-const entryPath = path.resolve(rootPath, 'shared/index.js')
-const outputPath = path.resolve(rootPath, 'build')
-const fileContextPath = path.resolve(rootPath, 'shared/assets')
+const rootPath = path.join(__dirname, '../../')
+const entryPath = path.join(rootPath, 'shared/index.js')
+const outputPath = path.join(rootPath, 'build')
+const fileContextPath = path.join(rootPath, 'shared/assets')
 
 const cleanWebpackBuild = new CleanWebpackPlugin(['build'], {
   root: rootPath,

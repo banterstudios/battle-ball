@@ -1,5 +1,5 @@
 import isDev from 'isdev'
-import { FRAME_DIVIDER, STEP, MAX_ALLOWED_UPDATES_PER_STEP } from '../../consts'
+import { STEP, MAX_ALLOWED_UPDATES_PER_STEP } from '../../consts'
 
 export default class TimeManager {
   constructor () {
@@ -8,7 +8,7 @@ export default class TimeManager {
     this.last = 0
 
     if (isDev) {
-      const Stats = require('stats.js')
+      const Stats = require('stats-js')
       this.stats = new Stats()
       this.stats.showPanel(0)
       document.body.appendChild(this.stats.dom)

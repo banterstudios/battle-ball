@@ -19,6 +19,7 @@ module.exports = {
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
+      "legacyDecorators": true,
       "modules": true
     }
   },

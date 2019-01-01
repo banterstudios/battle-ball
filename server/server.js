@@ -8,7 +8,6 @@ import exphbs from 'express-handlebars'
 import isDev from 'isdev'
 import expressStaticGzip from 'express-static-gzip'
 import httpResponses from './middleware/httpResponses'
-import { errorMessage } from './utils/messages'
 
 const port = process.env.PORT || 3100
 const app = express()
@@ -47,8 +46,8 @@ app.use(httpResponses())
 
 app.use(
   isDev
-    ? (req, res, next) => require('./router').default(req, res, next)
-    : require('./router').default
+    ? (req, res, next) => require('./routes').default(req, res, next)
+    : require('./routes').default
 )
 
 // Error handler

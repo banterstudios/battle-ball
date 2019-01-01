@@ -4,19 +4,19 @@ import isDev from 'isdev'
 const assetsToPreload = [{
   type: ASSET_TYPES.IMAGE,
   name: 'tile_flat',
-  src: '/static/assets/images/tiles/tile-single.png'
+  src: '/images/tiles/tile-single.png'
 }, {
   type: ASSET_TYPES.IMAGE,
   name: 'tile_thin',
-  src: '/static/assets/images/tiles/tile-thin.png'
+  src: '/images/tiles/tile-thin.png'
 }, {
   type: ASSET_TYPES.IMAGE,
   name: 'tile_highlight',
-  src: '/static/assets/images/tiles/tile-highlight.png'
+  src: '/images/tiles/tile-highlight.png'
 }, {
   type: ASSET_TYPES.IMAGE,
   name: 'player_blue',
-  src: '/static/assets/images/player/playerblue-new.png'
+  src: '/images/player/playerblue-new.png'
 }]
 
 export default class Preload {

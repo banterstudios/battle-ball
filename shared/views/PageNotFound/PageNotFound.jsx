@@ -1,14 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export default class PageNotFound extends Component {
-  render () {
-    const { children } = this.props
+const PageNotFound = ({ children }) => (
+  <div className='page-not-found'>
+    Could not find the page!!
+    { children }
+  </div>
+)
 
-    return (
-      <div className='page-not-found'>
-        Could not find the page!!
-        { children }
-      </div>
-    )
-  }
+PageNotFound.defaultProps = {
+  children: null
 }
+
+PageNotFound.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node
+  ])
+}
+
+export default PageNotFound

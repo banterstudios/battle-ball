@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export default class HomeView extends Component {
-  render () {
-    const { children } = this.props
+const HomeView = ({ children }) => (
+  <div className='home-view'>
+    { children }
+  </div>
+)
 
-    return (
-      <div className='home-view'>
-        { children }
-      </div>
-    )
-  }
+HomeView.defaultProps = {
+  children: null
 }
+
+HomeView.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node
+  ])
+}
+
+export default HomeView

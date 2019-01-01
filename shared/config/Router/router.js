@@ -5,7 +5,7 @@ import { hot } from 'react-hot-loader'
 import App from 'shared/components/App'
 import reduxStore from 'shared/redux/store'
 
-import routes from './routes'
+import routes from '../routes'
 
 const Router = () => {
   return (

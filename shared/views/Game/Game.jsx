@@ -1,29 +1,14 @@
-import React, { Component } from 'react'
-import glamorous from 'glamorous'
-import GameBoard from '../../components/Game'
+import React, { useEffect, useState } from 'react'
+import GameBoard from 'shared/components/GameBoard'
 
-const StyledView = glamorous.div({
-  position: 'relative',
-  width: '100%',
-  height: '100%'
-})
+const GameView = () => {
+  const [isClient, setIsClient] = useState(false)
 
-export default class GameView extends Component {
-  state = { isClient: false }
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
-  componentDidMount () {
-    this.setState({ isClient: true })
-  }
-
-  render () {
-    if (!this.state.isClient) {
-      return null
-    }
-
-    return (
-      <StyledView>
-        <GameBoard />
-      </StyledView>
-    )
-  }
+  return !isClient ? null : <GameBoard />
 }
+
+export default GameView

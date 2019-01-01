@@ -3,9 +3,9 @@ const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-const rootPath = path.resolve(__dirname, '../../')
-const entryPath = path.resolve(rootPath, 'server/index.js')
-const outputPath = path.resolve(rootPath, 'build-server')
+const rootPath = path.join(__dirname, '../../')
+const entryPath = path.join(rootPath, 'server/index.js')
+const outputPath = path.join(rootPath, 'build-server')
 
 const cleanWebpackBuild = new CleanWebpackPlugin(['build-server'], {
   root: rootPath,
@@ -17,7 +17,10 @@ const cleanWebpackBuild = new CleanWebpackPlugin(['build-server'], {
 module.exports = {
   name: 'server',
   target: 'node',
-  entry: entryPath,
+  entry: [
+    '@babel/polyfill',
+    entryPath
+  ],
   externals: [nodeExternals()],
   output: {
     path: outputPath,
@@ -29,10 +32,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel']
-      },
+      }
     ]
   },
   resolve: {

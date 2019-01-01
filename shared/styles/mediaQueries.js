@@ -1,4 +1,4 @@
-const breakpoints = require('./breakpoints')
+import * as BREAKPOINTS from './breakpoints'
 
 const createMinWidth = (value) => (
   `(min-width: ${value}px)`
@@ -15,4 +15,4 @@ const createQueries = (obj, [ key, { min, max } ]) => (
   }
 )
 
-module.exports = Object.entries(breakpoints).reduce(createQueries, {})
+export default Object.entries(BREAKPOINTS).reduce(createQueries, {})

@@ -8,8 +8,8 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const webpackMerge = require('webpack-merge')
 const commonConfig = require('./webpack.common')
 
-const rootPath = path.resolve(__dirname, '../../')
-const htmlTemplatePath = path.resolve(rootPath, 'server/templates/index.handlebars')
+const rootPath = path.join(__dirname, '../../')
+const htmlTemplatePath = path.join(rootPath, 'server/templates/index.handlebars')
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: htmlTemplatePath,

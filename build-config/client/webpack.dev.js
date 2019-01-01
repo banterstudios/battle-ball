@@ -6,9 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpackMerge = require('webpack-merge')
 const commonConfig = require('./webpack.common')
 
-const rootPath = path.resolve(__dirname, '../../')
-const buildViewsPath = path.resolve(rootPath, '/build/views')
-const htmlTemplatePath = path.resolve(rootPath, 'server/templates/index.handlebars')
+const rootPath = path.join(__dirname, '../../')
+const buildViewsPath = path.join(rootPath, '/build/views')
+const htmlTemplatePath = path.join(rootPath, 'server/templates/index.handlebars')
 
 const HTMLWebpackHardDiskPlugin = new HtmlWebpackHarddiskPlugin({
   outputPath: buildViewsPath
@@ -16,12 +16,14 @@ const HTMLWebpackHardDiskPlugin = new HtmlWebpackHarddiskPlugin({
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: htmlTemplatePath,
-  filename: 'views/index.handlebars',
+  filename: 'index.handlebars',
   alwaysWriteToDisk: true,
   inject: 'body'
 })
 
-module.exports = webpackMerge(commonConfig, {
+module.exports = webpackMerge.strategy({
+  plugins: 'append'
+})(commonConfig, {
   mode: 'development',
   entry: [
     'webpack-hot-middleware/client'

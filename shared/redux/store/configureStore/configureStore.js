@@ -3,7 +3,6 @@ import {
   applyMiddleware,
   compose
 } from 'redux'
-import thunkMiddleware from 'redux-thunk'
 import createSagaMiddleware, { END } from 'redux-saga'
 import { reducers, sagas } from '../../modules'
 import immutableStateInvariant from 'redux-immutable-state-invariant'
@@ -22,7 +21,7 @@ if (isDev) {
     const store = createStore(
       reducers,
       initialState,
-      composeEnhancers(applyMiddleware(immutableStateInvariant(), thunkMiddleware, sagaMiddleware))
+      composeEnhancers(applyMiddleware(immutableStateInvariant(), sagaMiddleware))
     )
 
     return { store, sagas: sagaMiddleware.run(sagas), close: () => store.dispatch(END) }
@@ -32,7 +31,7 @@ if (isDev) {
     const store = createStore(
       reducers,
       initialState,
-      applyMiddleware(thunkMiddleware, sagaMiddleware)
+      applyMiddleware(sagaMiddleware)
     )
 
     return { store, sagas: sagaMiddleware.run(sagas), close: () => store.dispatch(END) }
