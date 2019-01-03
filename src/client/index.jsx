@@ -1,9 +1,9 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
-import Router from 'shared/config/router'
 import { queryById } from 'shared/utils/domUtils'
+import Client from './Client'
 
 hydrate(
-  <Router />,
+  <Client />,
   queryById('app')
 )

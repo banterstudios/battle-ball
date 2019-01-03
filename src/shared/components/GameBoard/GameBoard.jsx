@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { withScaledWrapper } from 'shared/components/Common/ScaledWrapper'
-import Game from 'shared/game'
-import { Boot, Play, Preload } from 'shared/game/states'
-import { GAME_WIDTH, GAME_HEIGHT } from 'shared/game/consts'
+import withScaledWrapper from 'shared/hoc/withScaledWrapper'
+import Game from 'game'
+import { Boot, Play, Preload } from 'game/states'
+import { GAME_WIDTH, GAME_HEIGHT } from 'game/consts'
 
 @withScaledWrapper
 export default class GameBoard extends Component {
@@ -37,7 +37,6 @@ export default class GameBoard extends Component {
     this.game = null
   }
 
-  // React render
   render () {
     return (
       <canvas

@@ -1,18 +1,16 @@
 const webpack = require('webpack')
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const rootPath = path.join(__dirname, '../../')
-const entryPath = path.join(rootPath, 'shared/index.js')
+const entryPath = path.join(rootPath, 'src/client/index.jsx')
 const outputPath = path.join(rootPath, 'build')
-const fileContextPath = path.join(rootPath, 'shared/assets')
+const fileContextPath = path.join(rootPath, 'src/shared/assets')
 
 const cleanWebpackBuild = new CleanWebpackPlugin(['build'], {
   root: rootPath,
   verbose: true,
-  dry: false,
-  exclude: ['.gitkeep']
+  dry: false
 })
 
 module.exports = {
@@ -42,19 +40,6 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel']
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader?-autoprefixer&sourceMap&minimize',
-          'postcss-loader',
-          'sass-loader'
-        ]
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css'
       },
       {
         test: /\.(jpe?g|png|gif|svg|ttf|woff|eot|mp4|woff2)$/i,

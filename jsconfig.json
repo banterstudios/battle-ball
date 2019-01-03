@@ -3,8 +3,10 @@
       "experimentalDecorators": true,
       "baseUrl": ".",
       "paths": {
-        "shared/": ["shared/*"],
-        "server/*": ["server/*"]
+        "client/": ["src/client/*"],
+        "shared/": ["src/shared/*"],
+        "server/*": ["src/server/*"],
+        "game/*": ["src/game/*"]
       }
   },
   "exclude": [

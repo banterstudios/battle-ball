@@ -2,9 +2,10 @@
   "verbose": true,
   "setupTestFrameworkScriptFile": "<rootDir>/test/setUpTests.js",
   "moduleNameMapper": {
-    "^.+\\.(css|less|scss)$": "<rootDir>/test/cssStub.js",
-    "^shared[/](.+)": "<rootDir>/shared/$1",
-    "^server[/](.+)": "<rootDir>/server/$1"
+    "^client[/](.+)": "<rootDir>/src/client/$1",
+    "^game[/](.+)": "<rootDir>/src/game/$1",
+    "^shared[/](.+)": "<rootDir>/src/shared/$1",
+    "^server[/](.+)": "<rootDir>/src/server/$1"
   },
   "modulePaths": [
     "<rootDir>"

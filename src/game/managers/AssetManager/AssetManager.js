@@ -1,7 +1,7 @@
-import { isArray } from '../../../utils/objectUtils'
-import { getImage } from '../../../utils/imageUtils'
-import { getAudio } from '../../../utils/audioUtils'
-import { ASSET_TYPES } from '../../consts'
+import { ASSET_TYPES } from 'game/consts'
+import { isArray } from 'shared/utils/objectUtils'
+import { getImage } from 'shared/utils/imageUtils'
+import { getAudio } from 'shared/utils/audioUtils'
 
 const checkAssetValidity = (assets) => {
   if (!isArray(assets)) {

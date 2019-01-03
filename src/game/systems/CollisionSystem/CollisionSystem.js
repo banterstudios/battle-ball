@@ -1,4 +1,4 @@
-import { isoToMapCoord } from '../../helpers'
+import { isoToMapCoord } from 'game/helpers'
 
 export default class CollisionSystem {
   constructor ({ manager, game, camera }) {

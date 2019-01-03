@@ -1,6 +1,5 @@
-import { EntityManager } from '../../managers'
-
-import { STATIC_TILE_HEIGHT } from '../../consts'
+import { STATIC_TILE_HEIGHT } from 'game/consts'
+import { EntityManager } from 'game/managers'
 
 import {
   Moveable,
@@ -10,14 +9,14 @@ import {
   Collidable,
   TileMap,
   Player
-} from '../../components'
+} from 'game/components'
 
 import {
   FloorTile,
   IsometricCamera,
   Level,
   Player as PlayerAssemblage
-} from '../../assemblages'
+} from 'game/assemblages'
 
 import {
   RenderSystem,
@@ -25,7 +24,7 @@ import {
   CollisionSystem,
   PlayerFollowSystem,
   PhysicsSystem
-} from '../../systems'
+} from 'game/systems'
 
 export default class Play {
   constructor ({ game }) {

@@ -1,6 +1,6 @@
 import isDev from 'isdev'
-import { mapToIsoCoord, isoToMapCoord } from '../../helpers'
-import { Graph, aStar } from '../../pathfinding'
+import { isoToMapCoord } from 'game/helpers'
+import { Graph, aStar } from 'game/pathfinding'
 
 const lerp = (a, b, c) =>
   a + c * (b - a)

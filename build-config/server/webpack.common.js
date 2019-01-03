@@ -1,17 +1,15 @@
 const nodeExternals = require('webpack-node-externals')
 const path = require('path')
-const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const rootPath = path.join(__dirname, '../../')
-const entryPath = path.join(rootPath, 'server/index.js')
+const entryPath = path.join(rootPath, 'src/server/index.js')
 const outputPath = path.join(rootPath, 'build-server')
 
 const cleanWebpackBuild = new CleanWebpackPlugin(['build-server'], {
   root: rootPath,
   verbose: true,
-  dry: false,
-  exclude: ['.gitkeep']
+  dry: false
 })
 
 module.exports = {
@@ -42,7 +40,6 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx']
   },
   plugins: [
-    cleanWebpackBuild,
-    new webpack.IgnorePlugin(/\.(css|less|scss)$/)
+    cleanWebpackBuild
   ]
 }

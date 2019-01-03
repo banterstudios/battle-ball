@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import listenToWindowEvents from 'shared/containers/ListenToWindowEvents'
-import { calculateScaleForGame } from 'shared/utils/commonUtils'
 import { withTheme } from 'styled-components'
-import { ScaledWrapper } from './styles'
+import { calculateScaleForGame } from 'shared/utils/commonUtils'
 
-export default listenToWindowEvents({ eventTypes: ['resize'] })(ScaledWrapper)
-
-export const withScaledWrapper = (WrappedComponent) => {
+const withScaledWrapper = (WrappedComponent) => {
   class WithScaledWrapper extends Component {
     render () {
       const {
@@ -27,5 +23,7 @@ export const withScaledWrapper = (WrappedComponent) => {
     }
   }
 
-  return listenToWindowEvents({ eventTypes: ['resize'] })(withTheme(WithScaledWrapper))
+  return withTheme(WithScaledWrapper)
 }
+
+export default withScaledWrapper

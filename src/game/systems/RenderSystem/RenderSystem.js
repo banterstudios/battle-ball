@@ -1,4 +1,4 @@
-import { mapToIsoCoord } from '../../helpers'
+import { mapToIsoCoord } from 'game/helpers'
 import isDev from 'isdev'
 
 export default class RenderSystem {

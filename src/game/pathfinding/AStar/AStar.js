@@ -1,5 +1,3 @@
-import { path as objPath } from '../../../utils/objectUtils'
-
 //  var graph = new Graph([
 //  [1,1,1,1],
 //  [0,1,1,0],

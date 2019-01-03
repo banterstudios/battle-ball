@@ -2,7 +2,7 @@ import {
   clone,
   path,
   omit
-} from '../../../utils/objectUtils'
+} from 'shared/utils/objectUtils'
 
 const blackListedProps = ['entityId']
 

@@ -17,8 +17,10 @@
     ["module-resolver", {
       "root": ["./"],
       "alias": {
-        "shared": "./shared",
-        "server": "./server"
+        "client": "./src/client",
+        "game": "./src/game",
+        "shared": "./src/shared",
+        "server": "./src/server",
       },
       "transformFunctions": [
         "module.hot.accept"

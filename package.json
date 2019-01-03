@@ -2,9 +2,9 @@
   "name": "battle-ball",
   "version": "0.0.1",
   "description": "HTML5 Game",
-  "main": "./server/index.js",
+  "main": "./src/server/index.js",
   "scripts": {
-    "start": "node --harmony ./server",
+    "start": "node --harmony ./src/server",
     "start:prod": "cross-env NODE_ENV=production node --harmony ./build-server/server.js",
     "build": "webpack --progress --env.production --config webpack.config.js",
     "build:dev": "webpack --progress --config webpack.config.js",

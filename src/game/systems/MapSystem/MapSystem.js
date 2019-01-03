@@ -1,4 +1,4 @@
-import { mapToIsoCoord, isoToMapCoord } from '../../helpers'
+import { mapToIsoCoord, isoToMapCoord } from 'game/helpers'
 
 export default class MapSystem {
   constructor ({ manager, game, map, camera }) {

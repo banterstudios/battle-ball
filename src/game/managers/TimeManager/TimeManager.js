@@ -1,5 +1,5 @@
 import isDev from 'isdev'
-import { STEP, MAX_ALLOWED_UPDATES_PER_STEP } from '../../consts'
+import { STEP, MAX_ALLOWED_UPDATES_PER_STEP } from 'game/consts'
 
 export default class TimeManager {
   constructor () {

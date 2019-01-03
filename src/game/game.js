@@ -4,12 +4,12 @@ import {
   AssetManager,
   GameStateManager,
   InputManager
-} from './managers'
+} from 'game/managers'
 
 import {
   requestAnimationFrame,
   cancelAnimationFrame
-} from '../utils/domUtils'
+} from 'shared/utils/domUtils'
 
 const noop = () => {}
 

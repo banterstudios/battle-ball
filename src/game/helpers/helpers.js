@@ -1,4 +1,4 @@
-import { STATIC_TILE_WIDTH, STATIC_TILE_HEIGHT } from '../consts'
+import { STATIC_TILE_WIDTH, STATIC_TILE_HEIGHT } from 'game/consts'
 
 export const mapToIsoCoord = (x, y) => ({
   x: (x - y) * (STATIC_TILE_WIDTH / 2),

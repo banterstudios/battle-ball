@@ -1,5 +1,3 @@
-'use strict'
-
 import express from 'express'
 import bodyParser from 'body-parser'
 import path from 'path'
@@ -7,18 +5,18 @@ import morgan from 'morgan'
 import exphbs from 'express-handlebars'
 import isDev from 'isdev'
 import expressStaticGzip from 'express-static-gzip'
-import httpResponses from './middleware/httpResponses'
+import httpResponses from 'server/middleware/httpResponses'
 
 const port = process.env.PORT || 3100
 const app = express()
 
 if (isDev) {
-  require('./middleware/expressWebpack').default(app)
+  require('server/middleware/expressWebpack').default(app)
 }
 
 const handlebarsConfig = {
   defaultLayout: 'index',
-  layoutsDir: path.resolve(__dirname, '../build/views')
+  layoutsDir: path.resolve(__dirname, '../../build/views')
 }
 
 app.engine('handlebars',
@@ -31,8 +29,7 @@ app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// view engine setup
-app.set('views', path.resolve(__dirname, '../build/views'))
+app.set('views', path.resolve(__dirname, '../../build/views'))
 
 app.set('view engine', 'handlebars')
 
@@ -46,8 +43,8 @@ app.use(httpResponses())
 
 app.use(
   isDev
-    ? (req, res, next) => require('./routes').default(req, res, next)
-    : require('./routes').default
+    ? (req, res, next) => require('server/routes').default(req, res, next)
+    : require('server/routes').default
 )
 
 // Error handler

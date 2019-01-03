@@ -1,4 +1,4 @@
-import { ASSET_TYPES } from '../../consts'
+import { ASSET_TYPES } from 'game/consts'
 import isDev from 'isdev'
 
 const assetsToPreload = [{
