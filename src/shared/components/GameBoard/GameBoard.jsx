@@ -1,53 +1,52 @@
-import React, { Component } from 'react'
+import React, { useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import withScaledWrapper from 'shared/hoc/withScaledWrapper'
 import Game from 'game'
 import { Boot, Play, Preload } from 'game/states'
 import { GAME_WIDTH, GAME_HEIGHT } from 'game/consts'
+import { GameCanvas } from './styles'
 
-@withScaledWrapper
-export default class GameBoard extends Component {
-  constructor (props) {
-    super(props)
+const initGame = (game) => {
+  const { stateManager } = game
 
-    this.gameRef = React.createRef()
-    this.game = null
-  }
+  stateManager.add('boot', Boot)
+  stateManager.add('preload', Preload)
+  stateManager.add('play', Play)
 
-  componentDidMount () {
-    this.game = new Game({
-      canvas: this.gameRef.current,
-      init: this.initGame,
+  stateManager.start('boot')
+}
+
+const GameBoard = ({ gameWidth, gameHeight }) => {
+  const gameRef = useRef()
+  const gameInstance = useRef()
+
+  useEffect(() => {
+    gameInstance.current = new Game({
+      canvas: gameRef.current,
+      init: initGame,
       width: GAME_WIDTH,
       height: GAME_HEIGHT
     })
-  }
 
-  initGame = (game) => {
-    const { stateManager } = game
+    return () => {
+      gameInstance.current.stop()
+    }
+  }, [])
 
-    stateManager.add('boot', Boot)
-    stateManager.add('preload', Preload)
-    stateManager.add('play', Play)
-
-    stateManager.start('boot')
-  }
-
-  componentWillUnmount () {
-    this.game.stop()
-    this.game = null
-  }
-
-  render () {
-    return (
-      <canvas
-        width={GAME_WIDTH}
-        height={GAME_HEIGHT}
-        style={{
-          width: this.props.gameWidth || GAME_WIDTH,
-          height: this.props.gameHeight || GAME_HEIGHT
-        }}
-        ref={this.gameRef}
-      />
-    )
-  }
+  return (
+    <GameCanvas
+      width={GAME_WIDTH}
+      height={GAME_HEIGHT}
+      gameWidth={gameWidth || GAME_WIDTH}
+      gameHeight={gameHeight || GAME_HEIGHT}
+      ref={gameRef}
+    />
+  )
 }
+
+GameBoard.propTypes = {
+  gameWidth: PropTypes.number,
+  gameHeight: PropTypes.number
+}
+
+export default withScaledWrapper(GameBoard)

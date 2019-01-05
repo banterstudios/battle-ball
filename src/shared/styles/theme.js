@@ -7,6 +7,9 @@ export default {
   // Fonts
   fontPrimary: `${TYPOG.helvetica}, ${TYPOG.sansSerif}`,
 
+  // Background
+  bgPrimary: COLORS.black,
+
   // Modal
   priorityModalZIndex: 9999,
   modalPrimaryBg: COLORS.offsetWhite,

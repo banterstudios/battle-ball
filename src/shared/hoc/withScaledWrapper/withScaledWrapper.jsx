@@ -1,26 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { withTheme } from 'styled-components'
 import { calculateScaleForGame } from 'shared/utils/commonUtils'
+import useWindowResize from '@banterstudiosuk/use-window-resize'
 
 const withScaledWrapper = (WrappedComponent) => {
-  class WithScaledWrapper extends Component {
-    render () {
-      const {
-        theme: {
-          game: {
-            heightNoUnit,
-            widthNoUnit
-          }
-        },
-        resize: { width, height } = {}
-      } = this.props
+  const WithScaledWrapper = (props) => {
+    const { innerWidth, innerHeight } = useWindowResize()
+    const {
+      theme: {
+        game: {
+          heightNoUnit,
+          widthNoUnit
+        }
+      }
+    } = props
 
-      const gameDimensions = calculateScaleForGame({ gameHeight: heightNoUnit, gameWidth: widthNoUnit, windowWidth: width, windowHeight: height })
+    const gameDimensions = calculateScaleForGame({
+      gameHeight: heightNoUnit,
+      gameWidth: widthNoUnit,
+      windowWidth: innerWidth,
+      windowHeight: innerHeight
+    })
 
-      return <WrappedComponent
+    return (
+      <WrappedComponent
         gameWidth={widthNoUnit * gameDimensions.width}
         gameHeight={heightNoUnit * gameDimensions.height} />
-    }
+    )
   }
 
   return withTheme(WithScaledWrapper)
