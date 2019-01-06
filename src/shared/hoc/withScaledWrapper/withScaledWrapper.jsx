@@ -4,7 +4,7 @@ import { calculateScaleForGame } from 'shared/utils/commonUtils'
 import useWindowResize from '@banterstudiosuk/use-window-resize'
 
 const withScaledWrapper = (WrappedComponent) => {
-  const WithScaledWrapper = (props) => {
+  const ScaledWrapper = (props) => {
     const { innerWidth, innerHeight } = useWindowResize()
     const {
       theme: {
@@ -15,7 +15,7 @@ const withScaledWrapper = (WrappedComponent) => {
       }
     } = props
 
-    const gameDimensions = calculateScaleForGame({
+    const scaleFactor = calculateScaleForGame({
       gameHeight: heightNoUnit,
       gameWidth: widthNoUnit,
       windowWidth: innerWidth,
@@ -24,12 +24,12 @@ const withScaledWrapper = (WrappedComponent) => {
 
     return (
       <WrappedComponent
-        gameWidth={widthNoUnit * gameDimensions.width}
-        gameHeight={heightNoUnit * gameDimensions.height} />
+        gameWidth={widthNoUnit * scaleFactor.width}
+        gameHeight={heightNoUnit * scaleFactor.height} />
     )
   }
 
-  return withTheme(WithScaledWrapper)
+  return withTheme(ScaledWrapper)
 }
 
 export default withScaledWrapper

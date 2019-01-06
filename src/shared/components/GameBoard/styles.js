@@ -4,6 +4,6 @@ export const GameCanvas = Styled.canvas.attrs({
   width: `${({ width }) => width}`,
   height: `${({ height }) => height}`
 })`
-  width: ${({ gameWidth }) => gameWidth},
-  height: ${({ gameHeight }) => gameHeight},
+  width: ${({ gameWidth }) => gameWidth}px;
+  height: ${({ gameHeight }) => gameHeight}px;
 `

@@ -45,8 +45,8 @@ const GameBoard = ({ gameWidth, gameHeight }) => {
 }
 
 GameBoard.propTypes = {
-  gameWidth: PropTypes.number,
-  gameHeight: PropTypes.number
+  gameWidth: PropTypes.number.isRequired,
+  gameHeight: PropTypes.number.isRequired
 }
 
 export default withScaledWrapper(GameBoard)
