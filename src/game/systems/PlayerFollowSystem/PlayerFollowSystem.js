@@ -2,9 +2,6 @@ import isDev from 'isdev'
 import { isoToMapCoord } from 'game/helpers'
 import { Graph, aStar } from 'game/pathfinding'
 
-const lerp = (a, b, c) =>
-  a + c * (b - a)
-
 export default class PlayerFollowSystem {
   constructor ({ manager, game, camera }) {
     this.manager = manager
@@ -48,10 +45,20 @@ export default class PlayerFollowSystem {
     const { speed } = this.manager.getComponentDataForEntity('Moveable', player)
     const position = this.manager.getComponentDataForEntity('Position', player)
 
-    const pX = lerp(position.x, x, speed)
-    const pY = lerp(position.y, y, speed)
+    let isPlayerAtTarget = false
+    let pX = position.x
+    let pY = position.y
 
-    if (pX <= 1 && pY <= 1) {
+    if (Math.abs(position.x - x) > speed || Math.abs(position.y - y) > speed) {
+      pX += Math.max(-speed, Math.min(speed, x - position.x))
+      pY += Math.max(-speed, Math.min(speed, y - position.y))
+    } else {
+      pX = x
+      pY = y
+      isPlayerAtTarget = true
+    }
+
+    if (isPlayerAtTarget) {
       this.targetPositions.shift()
     }
 

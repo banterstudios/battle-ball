@@ -1,6 +1,6 @@
 export default {
   name: 'Moveable',
   state: {
-    speed: 1
+    speed: 0.1
   }
 }

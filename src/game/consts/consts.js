@@ -31,7 +31,3 @@ export const GAME_HEIGHT = (GAME_WIDTH / 2)
 export const STATIC_TILE_WIDTH = 128
 
 export const STATIC_TILE_HEIGHT = (STATIC_TILE_WIDTH / 2)
-
-export const GAME_INPUT = {
-
-}
