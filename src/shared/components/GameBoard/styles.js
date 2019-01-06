@@ -6,4 +6,5 @@ export const GameCanvas = Styled.canvas.attrs({
 })`
   width: ${({ gameWidth }) => gameWidth}px;
   height: ${({ gameHeight }) => gameHeight}px;
+  transition: all .2s ease-out;
 `
