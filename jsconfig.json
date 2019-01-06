@@ -1,5 +1,17 @@
 {
   "compilerOptions": {
-      "experimentalDecorators": true
-  }
+      "experimentalDecorators": true,
+      "baseUrl": ".",
+      "paths": {
+        "client/": ["src/client/*"],
+        "shared/": ["src/shared/*"],
+        "server/*": ["src/server/*"],
+        "game/*": ["src/game/*"]
+      }
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "build-server"
+  ]
 }
