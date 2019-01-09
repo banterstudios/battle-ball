@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import withScaledWrapper from 'shared/hoc/withScaledWrapper'
+import { withTheme } from 'styled-components'
+import useScaledResize from 'shared/hooks/useScaledResize'
 import Game from 'game'
 import { Boot, Play, Preload } from 'game/states'
 import { GAME_WIDTH, GAME_HEIGHT } from 'game/consts'
@@ -16,9 +16,11 @@ const initGame = (game) => {
   stateManager.start('boot')
 }
 
-const GameBoard = ({ gameWidth, gameHeight }) => {
+const GameBoard = ({ theme }) => {
   const gameRef = useRef()
   const gameInstance = useRef()
+  const { widthNoUnit: width, heightNoUnit: height } = theme.game
+  const dimensions = useScaledResize({ width, height })
 
   useEffect(() => {
     gameInstance.current = new Game({
@@ -37,16 +39,11 @@ const GameBoard = ({ gameWidth, gameHeight }) => {
     <GameCanvas
       width={GAME_WIDTH}
       height={GAME_HEIGHT}
-      gameWidth={gameWidth || GAME_WIDTH}
-      gameHeight={gameHeight || GAME_HEIGHT}
+      gameWidth={dimensions.width || GAME_WIDTH}
+      gameHeight={dimensions.height || GAME_HEIGHT}
       ref={gameRef}
     />
   )
 }
 
-GameBoard.propTypes = {
-  gameWidth: PropTypes.number.isRequired,
-  gameHeight: PropTypes.number.isRequired
-}
-
-export default withScaledWrapper(GameBoard)
+export default withTheme(GameBoard)

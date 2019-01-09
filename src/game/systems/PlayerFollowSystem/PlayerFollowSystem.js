@@ -29,6 +29,8 @@ export default class PlayerFollowSystem {
       const { x: cameraX, y: cameraY } = this.manager.getComponentDataForEntity('Position', this.camera)
       const { x: isoMouseX, y: isoMouseY } = isoToMapCoord(mouseX - cameraX, mouseY - cameraY)
 
+      console.log(Math.round(isoMouseX - 1), Math.round(isoMouseY))
+
       const start = this.graph.at(Math.round(x), Math.round(y))
       const end = this.graph.at((Math.round(isoMouseX) - 1), Math.round(isoMouseY))
 
@@ -36,7 +38,7 @@ export default class PlayerFollowSystem {
     }
   }
 
-  movePlayerToTarget (player, delta) {
+  movePlayerToTarget (player) {
     if (!this.targetPositions.length) {
       return false
     }

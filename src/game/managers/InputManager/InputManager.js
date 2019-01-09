@@ -45,8 +45,8 @@ export default class InputManager {
         break
     }
 
-    this.mouse.x = ((clientX - left) * scaleX) >> 0
-    this.mouse.y = ((clientY - top) * scaleY) >> 0
+    this.mouse.x = Math.round((clientX - left) * scaleX)
+    this.mouse.y = Math.round((clientY - top) * scaleY)
   }
 
   destroy () {
